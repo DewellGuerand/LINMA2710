@@ -40,7 +40,7 @@ void testConstructorsAndAccessors()
     assigned = m;
     assert(matricesEqual(m, assigned));
 
-    std::cout << "testConstructorsAndAccessors passed." << std::endl;
+    // std::cout << "testConstructorsAndAccessors passed." << std::endl;
 }
 
 void testAdditionSubtraction()
@@ -65,7 +65,7 @@ void testAdditionSubtraction()
     assert(approxEqual(diff.get(1, 0), 4));
     assert(approxEqual(diff.get(1, 1), 4));
 
-    std::cout << "testAdditionSubtraction passed." << std::endl;
+    // std::cout << "testAdditionSubtraction passed." << std::endl;
 }
 
 void testScalarAndSquareMultiplication()
@@ -90,7 +90,7 @@ void testScalarAndSquareMultiplication()
     assert(approxEqual(prod.get(1, 0), 43));
     assert(approxEqual(prod.get(1, 1), 50));
 
-    std::cout << "testScalarAndSquareMultiplication passed." << std::endl;
+    // std::cout << "testScalarAndSquareMultiplication passed." << std::endl;
 }
 
 void testRectangularMultiplication()
@@ -116,7 +116,7 @@ void testRectangularMultiplication()
         for (int j = 0; j < 4; ++j)
             assert(approxEqual(C.get(i, j), expected[i][j]));
 
-    std::cout << "testRectangularMultiplication passed." << std::endl;
+    // std::cout << "testRectangularMultiplication passed." << std::endl;
 }
 
 void testTranspose()
@@ -131,7 +131,7 @@ void testTranspose()
     assert(approxEqual(t.get(1, 0), 2));
     assert(approxEqual(t.get(1, 1), 4));
 
-    std::cout << "testTranspose passed." << std::endl;
+    // std::cout << "testTranspose passed." << std::endl;
 }
 
 void testApply()
@@ -146,7 +146,7 @@ void testApply()
     assert(approxEqual(squared.get(1, 0), 9));
     assert(approxEqual(squared.get(1, 1), 16));
 
-    std::cout << "testApply passed." << std::endl;
+    // std::cout << "testApply passed." << std::endl;
 }
 
 void testSubMul()
@@ -165,7 +165,7 @@ void testSubMul()
     assert(approxEqual(a.get(1, 0), -4));
     assert(approxEqual(a.get(1, 1), -3));
 
-    std::cout << "testSubMul passed." << std::endl;
+   // std::cout << "testSubMul passed." << std::endl;
 }
 
 int main()
@@ -178,6 +178,6 @@ int main()
     testApply();
     testSubMul();
 
-    std::cout << "All matrix tests passed." << std::endl;
+    // std::cout << "All matrix tests passed." << std::endl;
     return 0;
 }

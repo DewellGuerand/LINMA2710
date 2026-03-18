@@ -72,17 +72,13 @@ Matrix Matrix::operator+(const Matrix &other) const
     result.cols = this->cols;
     result.data = std::vector<double>(this->rows * this->cols, 0.0);
 
-    #pragma omp parallel for
     for (int i = 0 ; i < this->rows ; i++){
         for (int j = 0 ; j < this->cols ; j++){
             result.data[i * result.cols + j] = this->data[i * this->cols + j] + other.get(i, j);
         }
     }
     
-    
-    
     return result;
-    
 }
 
 Matrix Matrix::operator-(const Matrix &other) const
@@ -92,7 +88,7 @@ Matrix Matrix::operator-(const Matrix &other) const
     result.rows = this->rows;
     result.cols = this->cols;
     result.data = std::vector<double>(this->rows * this->cols, 0.0);
-    #pragma omp parallel for
+
     for (int i = 0 ; i < this->rows ; i++){
         for (int j = 0 ; j < this->cols ; j++){
             result.data[i * result.cols + j] = this->data[i * this->cols + j] - other.get(i, j);
@@ -104,12 +100,25 @@ Matrix Matrix::operator-(const Matrix &other) const
 
 Matrix Matrix::operator*(const Matrix &other) const
 {
-    
-    
+    Matrix result(0, 0);
+    // TODO
+    result.rows = this->rows;
+    result.cols = other.numCols();
+    result.data = std::vector<double>(result.rows * result.cols, 0.0);
+    Matrix otherT = other.transpose();
+    #pragma omp simd
+    for (int i = 0 ; i < this->rows ; i++){
+        for (int j = 0 ; j < result.cols ; j++){
+            for (int k = 0 ; k < this->cols ; k++){
+                result.data[i * result.cols + j] += this->data[i * this->cols + k] * otherT.data[k * otherT.cols + j];
+            }
+        }
+    }
+    return result;
+    /*
     int R = this->rows, K = this->cols, C = other.numCols();
     Matrix result(R, C);
-    Matrix otherT = other.transpose();         
-    #pragma omp parallel for
+    Matrix otherT = other.transpose(); 
     for (int i = 0; i < R; i++){
         for (int j = 0; j < C; j++){
             double sum = 0.0;
@@ -122,7 +131,7 @@ Matrix Matrix::operator*(const Matrix &other) const
     return result;
     
     
-    
+    */
 }
 
 Matrix Matrix::operator*(double scalar) const
@@ -132,7 +141,7 @@ Matrix Matrix::operator*(double scalar) const
     result.rows = this->rows;
     result.cols = this->cols;
     result.data = std::vector<double>(this->rows * this->cols, 0.0);
-    #pragma omp parallel for
+
     for (int i = 0 ; i < result.rows ; i++){
         for (int j = 0 ; j < result.cols ; j++){
             result.data[i * result.cols + j] = this->data[i * this->cols + j] * scalar;
@@ -148,7 +157,7 @@ Matrix Matrix::transpose() const
     result.rows = this->cols;
     result.cols = this->rows;
     result.data = std::vector<double>(result.rows * result.cols, 0.0);
-    #pragma omp parallel for
+
     for (int i = 0 ; i < this->rows ; i++){
         for (int j = 0 ; j < this->cols ; j++){
             result.data[j * result.cols + i] = this->data[i * this->cols + j];
@@ -164,7 +173,6 @@ Matrix Matrix::apply(const std::function<double(double)> &func) const
     result.rows = this->rows ; 
     result.cols = this->cols ;
     result.data = std::vector<double>(result.rows * result.cols, 0.0);
-    #pragma omp parallel for
     for (int i = 0 ; i < result.rows ; i++){
         for (int j = 0 ; j < result.cols ; j++){
             result.data[i * result.cols + j] = func(this->data[i * this->cols + j]);

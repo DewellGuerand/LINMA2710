@@ -1,6 +1,14 @@
 CXX = g++
 MPICXX = mpic++
-CXXFLAGS = -std=c++17 -Wall -Wextra -O2
+CXXFLAGS = -std=c++17 -Wall -Wextra 
+O1FLAGS = -O1
+O2FLAGS = -O2
+O3FLAGS = -O3
+FASTMATHFLAGS = -ffast-math
+NATIVEFLAGS = -march=native
+
+
+
 INCLUDE = -Iinclude
 
 # OpenMP flag: set to empty to disable (e.g., on macOS without OpenMP)
@@ -11,6 +19,28 @@ SRC_DIR ?= src
 # --- Part 1 & 2: Basic + OpenMP Matrix ---
 test_matrix: tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
 	$(CXX) $(CXXFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_O1: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O1FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O1 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_O2: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O2FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O2 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_O3: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O3 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_fastmath: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fastmath tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_native: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(NATIVEFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_native tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_fO3 : tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
+test_matrix_perso_fO3native : tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(NATIVEFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3native tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+
 
 run_matrix: test_matrix
 	./test_matrix
@@ -33,6 +63,6 @@ run_opencl: test_opencl
 all: test_matrix test_distributed test_opencl
 
 clean:
-	rm -f test_matrix test_distributed test_opencl
+	rm -f test_matrix test_distributed test_opencl test_matrix_perso_O1 test_matrix_perso_O2 test_matrix_perso_O3 test_matrix_perso_fastmath test_matrix_perso_native test_matrix_perso_fO3 test_matrix_perso_fO3native
 
 .PHONY: all clean run_matrix run_distributed run_opencl
