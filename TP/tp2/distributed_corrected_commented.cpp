@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     // 1) how to distribute a vector across processes,
     // 2) how each process computes locally,
     // 3) how to gather the result back on rank 0.
-    const int N = 20000000;
+    const int N =2;
 
     /*
      * counts[p] = number of entries sent to process p
