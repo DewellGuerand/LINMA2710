@@ -122,19 +122,30 @@ void DistributedMatrix::set(int i, int j, double value)
 int DistributedMatrix::globalColIndex(int localColIdx) const
 {
     // TODO
-    return -1;
+    // Number of total column :
+    
+    return startCol + localColIdx ;
 }
 
 int DistributedMatrix::localColIndex(int globalColIdx) const
 {
     // TODO
-    return -1;
+
+    return globalColIdx - startCol;
 }
 
 int DistributedMatrix::ownerProcess(int globalColIdx) const
 {
     // TODO
-    return -1;
+    if (startCol <= globalColIdx){
+        if (globalColIdx <= startCol + localCols){
+            return rank ;
+        }
+    }
+    
+   
+    
+    
 }
 
 void DistributedMatrix::fill(double value)
@@ -174,7 +185,9 @@ void DistributedMatrix::sub_mul(double scalar, const DistributedMatrix& other)
 DistributedMatrix DistributedMatrix::apply(const std::function<double(double)>& func) const
 {
     // TODO
-    return DistributedMatrix(*this);
+    DistributedMatrix result(*this);           
+    result.localData = localData.apply(func);  
+    return result;
 }
 
 DistributedMatrix DistributedMatrix::applyBinary(
@@ -183,13 +196,21 @@ DistributedMatrix DistributedMatrix::applyBinary(
     const std::function<double(double, double)>& func)
 {
     // TODO
-    return DistributedMatrix(a);
+    DistributedMatrix result(a);
+    Matrix newData(a.globalRows, a.localCols);
+    for (int i = 0; i < a.globalRows; i++)
+        for (int j = 0; j < a.localCols; j++)
+            newData.set(i, j, func(a.localData.get(i, j), b.localData.get(i, j)));
+    result.localData = newData;
+    return result;
 }
 
 DistributedMatrix multiply(const Matrix& left, const DistributedMatrix& right)
 {
     // TODO
-    return DistributedMatrix(right);
+    DistributedMatrix result(right) ;  
+    result.localData = left * right.localData ; 
+    return result;
 }
 
 Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) const
