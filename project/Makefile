@@ -50,7 +50,7 @@ test_distributed: tests/test_distributed.cpp $(SRC_DIR)/distributed_matrix.cpp $
 	$(MPICXX) $(CXXFLAGS) $(INCLUDE) -o test_distributed tests/test_distributed.cpp $(SRC_DIR)/distributed_matrix.cpp $(SRC_DIR)/matrix.cpp
 
 run_distributed: test_distributed
-	mpirun -np 4 ./test_distributed
+	mpirun -np 4 --oversubscribe ./test_distributed
 
 # --- Part 4: OpenCL Matrix ---
 test_opencl: tests/test_opencl.cpp $(SRC_DIR)/matrix_opencl.cpp include/matrix_opencl.hpp

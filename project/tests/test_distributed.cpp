@@ -312,7 +312,7 @@ void testCommonOperations() {
     Matrix expectedSubMul(testMatrix1);
     expectedSubMul.sub_mul(2.0, testMatrix2);
     assert(matricesEqual(subMulTest.gather(), expectedSubMul));
-
+    MPI_Barrier(MPI_COMM_WORLD);                                                                                                                                                                      
     if (rank == 0)
         std::cout << "testCommonOperations passed." << std::endl;
 }

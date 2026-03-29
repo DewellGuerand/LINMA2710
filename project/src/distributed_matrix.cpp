@@ -27,7 +27,6 @@ DistributedMatrix::DistributedMatrix(const Matrix& matrix, int numProcs)
     char proc_name[MPI_MAX_PROCESSOR_NAME];
     MPI_Get_processor_name(proc_name, &name_length);
 
-    std::printf("Process %d/%d is running on node <<%s>>\n", rank, numProcs, proc_name);
 
     // Vector to assign each column ect 
     std::vector<int> counts(numProcs);
@@ -111,13 +110,51 @@ const Matrix& DistributedMatrix::getLocalData() const { return localData; }
 double DistributedMatrix::get(int i, int j) const
 {
     // TODO
-    return 0.0;
+    
+    if(J - startCol >= 0 ){
+        if (j-startCol< localCols){
+            return localData.get(i,j-startCol) ; 
+        }
+    }
+
+    else {
+        throw std::runtime_error("Column " + std::to_string(j) + " not owned by this process");
+    };
 }
 
 void DistributedMatrix::set(int i, int j, double value)
 {
     // TODO
+    if(j - startCol>= 0 ){
+        if (j-startCol< localCols){
+            localData.set(i,j-startCol, value) ; 
+        }
+    }
+    else throw std::runtime_error("Column " + std::to_string(j) + " not owned by this process");
+
+
+    
 }
+
+/*
+double DistributedMatrix::get(int i, int j) const
+{
+    int localCol = j - startCol;
+    if (localCol < 0 || localCol >= localCols)
+        throw std::runtime_error("Column " + std::to_string(j) + " not owned by this process");
+    return localData.get(i, localCol);
+}
+
+void DistributedMatrix::set(int i, int j, double value)
+{
+    int localCol = j - startCol;
+    if (localCol < 0 || localCol >= localCols)
+        throw std::runtime_error("Column " + std::to_string(j) + " not owned by this process");
+    localData.set(i, localCol, value);
+}
+
+
+*/
 
 int DistributedMatrix::globalColIndex(int localColIdx) const
 {
@@ -142,44 +179,60 @@ int DistributedMatrix::ownerProcess(int globalColIdx) const
             return rank ;
         }
     }
-    
-   
-    
+    return 0;
     
 }
 
 void DistributedMatrix::fill(double value)
 {
     // TODO
+    Matrix result(globalRows , localCols) ;
+    result.fill(value);
+    localData = result ; 
+    
 }
 
 DistributedMatrix DistributedMatrix::operator+(const DistributedMatrix& other) const
 {
     // TODO
-    return DistributedMatrix(*this);
+    DistributedMatrix result(other);
+    result.localData = localData + other.localData ; 
+    return result;
 }
 
 DistributedMatrix DistributedMatrix::operator-(const DistributedMatrix& other) const
 {
     // TODO
-    return DistributedMatrix(*this);
+    DistributedMatrix result(other);
+    result.localData = localData - other.localData ; 
+    return result;
 }
 
 DistributedMatrix DistributedMatrix::operator*(double scalar) const
 {
     // TODO
-    return DistributedMatrix(*this);
+    DistributedMatrix result(*this);
+    result.localData = localData * scalar ; 
+    return result;
 }
 
 Matrix DistributedMatrix::transpose() const
 {
     // TODO
-    return Matrix(globalCols, globalRows);
+    Matrix result(globalRows , globalCols);
+    result = (*this).gather() ; 
+    
+
+    return result.transpose();
 }
 
 void DistributedMatrix::sub_mul(double scalar, const DistributedMatrix& other)
 {
     // TODO
+    DistributedMatrix result(other);
+    localData = localData - other.localData * scalar ; 
+    
+
 }
 
 DistributedMatrix DistributedMatrix::apply(const std::function<double(double)>& func) const
@@ -208,21 +261,63 @@ DistributedMatrix DistributedMatrix::applyBinary(
 DistributedMatrix multiply(const Matrix& left, const DistributedMatrix& right)
 {
     // TODO
-    DistributedMatrix result(right) ;  
-    result.localData = left * right.localData ; 
+    DistributedMatrix result(right) ;
+    // Row doivent être update parce que sinon mismatch de dimention 
+    result.globalRows = left.numRows();
+    result.localData = left * right.localData ;
     return result;
 }
 
 Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) const
 {
-    // TODO
-    return Matrix(globalRows, other.globalRows);
+    
+
+    Matrix localContrib = localData * other.localData.transpose();
+
+    int resultRows = globalRows;
+    int resultCols = other.globalRows;
+    int totalElems = resultRows * resultCols;
+
+    std::vector<double> sendBuf(totalElems);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            sendBuf[i * resultCols + j] = localContrib.get(i, j);
+
+    std::vector<double> recvBuf(totalElems);
+    MPI_Allreduce(sendBuf.data(), recvBuf.data(), totalElems, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD); // Every process get the reduced value, because it is testec for every of them  
+
+    Matrix result(resultRows, resultCols);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            result.set(i, j, recvBuf[i * resultCols + j]);
+
+    return result;
 }
 
 double DistributedMatrix::sum() const
 {
     // TODO
-    return 0.0;
+    double local_sum_send = 0 ; 
+    // EAch process has a GLobalROws x localCOls so we will need to sum everything and then send it by a AllREduce in order to have the correct number 
+    for (int i = 0; i < globalRows; i++)
+    {
+        
+        for (int j = 0; j < localCols; j++)
+        {
+            local_sum_send += localData.get(i,j) ; 
+        }
+            
+        
+        
+    }
+
+    double global_sum =0; 
+    MPI_Allreduce(&local_sum_send , &global_sum , 1, MPI_DOUBLE , MPI_SUM , MPI_COMM_WORLD);
+
+    
+    
+    
+    return global_sum;
 }
 
 Matrix DistributedMatrix::gather() const
@@ -248,28 +343,25 @@ Matrix DistributedMatrix::gather() const
     for (int p = 1; p < numProcesses; ++p)
         displs[p] = displs[p-1] + counts[p-1];
 
-    std::vector<double> recv_buffer;
-    if (rank == 0)
-        recv_buffer.resize(globalCols * globalRows);
+    std::vector<double> recv_buffer(globalRows * globalCols);
 
-    MPI_Gatherv(
+    MPI_Allgatherv(
         send_buffer.data(),                      // chaque process envoie
         localCols * globalRows,                  // nb éléments envoyés
         MPI_DOUBLE,
-        rank == 0 ? recv_buffer.data() : nullptr, // rank 0 reçoit
+        recv_buffer.data(), 
         counts.data(),
         displs.data(),
         MPI_DOUBLE,
-        0,
         MPI_COMM_WORLD
     );
 
     Matrix result(globalRows, globalCols);
-    if (rank == 0) {
-        for (int col = 0; col < globalCols; ++col)
-            for (int row = 0; row < globalRows; ++row)
+   
+    for (int col = 0; col < globalCols; ++col)
+        for (int row = 0; row < globalRows; ++row)
                 result.set(row, col, recv_buffer[col * globalRows + row]);
-    }
+            
 
     return result;
 }
