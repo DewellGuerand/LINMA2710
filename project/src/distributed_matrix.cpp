@@ -111,7 +111,7 @@ double DistributedMatrix::get(int i, int j) const
 {
     // TODO
     
-    if(J - startCol >= 0 ){
+    if(j - startCol >= 0 ){
         if (j-startCol< localCols){
             return localData.get(i,j-startCol) ; 
         }
@@ -293,6 +293,41 @@ Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) con
 
     return result;
 }
+
+// For computation time 
+/*
+
+
+Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) const
+{
+    
+
+    Matrix localContrib = localData * other.localData.transpose();
+
+    int resultRows = globalRows;
+    int resultCols = other.globalRows;
+    int totalElems = resultRows * resultCols;
+
+    std::vector<double> sendBuf(totalElems);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            sendBuf[i * resultCols + j] = localContrib.get(i, j);
+
+    std::vector<double> recvBuf(totalElems);
+    MPI_Allreduce(sendBuf.data(), recvBuf.data(), totalElems, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD); // Every process get the reduced value, because it is testec for every of them  
+
+    Matrix result(resultRows, resultCols);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            result.set(i, j, recvBuf[i * resultCols + j]);
+
+    return result;
+}
+*/
+
+
+
+
 
 double DistributedMatrix::sum() const
 {
