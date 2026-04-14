@@ -4,6 +4,10 @@
 #include <cmath>
 
 
+// A commenter juste pour les tests
+#include <iostream>
+
+
 // The matrix is split by columns across MPI processes.
 // Each process stores a local Matrix with a subset of columns.
 // Columns are distributed as evenly as possible.
@@ -107,7 +111,7 @@ DistributedMatrix::DistributedMatrix(const DistributedMatrix& other)
 int DistributedMatrix::numRows() const { return globalRows; }
 int DistributedMatrix::numCols() const { return globalCols; }
 const Matrix& DistributedMatrix::getLocalData() const { return localData; }
-/*
+
 double DistributedMatrix::get(int i, int j) const
 {
     // TODO
@@ -122,8 +126,7 @@ double DistributedMatrix::get(int i, int j) const
         throw std::runtime_error("Column " + std::to_string(j) + " not owned by this process");
         return -1 ; 
     };
-    return -1 ; 
-
+    return -1; 
 }
 
 void DistributedMatrix::set(int i, int j, double value)
@@ -139,8 +142,8 @@ void DistributedMatrix::set(int i, int j, double value)
 
     
 }
-*/
 
+/*
 double DistributedMatrix::get(int i, int j) const
 {
     int localCol = j - startCol;
@@ -158,7 +161,7 @@ void DistributedMatrix::set(int i, int j, double value)
 }
 
 
-
+*/
 
 int DistributedMatrix::globalColIndex(int localColIdx) const
 {
@@ -273,7 +276,47 @@ DistributedMatrix multiply(const Matrix& left, const DistributedMatrix& right)
 }
 
 
+// A commenter juste pour les tests
 
+Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) const
+{
+    MPI_Barrier(MPI_COMM_WORLD);
+    double t0 = MPI_Wtime();
+    Matrix localContrib = localData * other.localData.transpose();
+    double t_compute = MPI_Wtime() - t0;
+
+    int resultRows = globalRows;
+    int resultCols = other.globalRows;
+    int totalElems = resultRows * resultCols;
+
+    std::vector<double> sendBuf(totalElems);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            sendBuf[i * resultCols + j] = localContrib.get(i, j);
+
+    std::vector<double> recvBuf(totalElems);
+
+    MPI_Barrier(MPI_COMM_WORLD);
+    double t1 = MPI_Wtime();
+    MPI_Allreduce(sendBuf.data(), recvBuf.data(), totalElems, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    double t_comm = MPI_Wtime() - t1;
+
+    double max_compute, max_comm;
+    MPI_Reduce(&t_compute, &max_compute, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&t_comm,    &max_comm,    1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    if (rank == 0)
+        std::cout << max_compute << " " << max_comm << std::endl;
+
+    Matrix result(resultRows, resultCols);
+    for (int i = 0; i < resultRows; ++i)
+        for (int j = 0; j < resultCols; ++j)
+            result.set(i, j, recvBuf[i * resultCols + j]);
+
+    return result;
+}
+
+// For computation time 
+/*
 
 
 Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) const
@@ -301,7 +344,7 @@ Matrix DistributedMatrix::multiplyTransposed(const DistributedMatrix& other) con
 
     return result;
 }
-
+*/
 
 
 
@@ -408,4 +451,4 @@ void sync_matrix(Matrix *matrix, int rank, int src)
             for (int j = 0; j < cols; ++j)                                                                  
                 matrix->set(i, j, buf[i * cols + j]);
     }                                                                                                       
-} 
+}  

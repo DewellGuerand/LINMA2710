@@ -224,4 +224,17 @@ En pratique, c'est pour ces raisons que l'on n'implémente jamais naïvement la 
 For small matrices, OpenMP parallelization may actually slow things down. Explain why and discuss potential solutions.
 ])
 
+Time to start the threads>> time for computation. Logical, maybe interesting to comput this time 
 
+
+= Part 3
+ Reregarder le code et bien savoir expliquer le sync ect 
+#showybox([
+Profile and analyze the communication overhead (MPI operations) versus actual computation time in DistributedMatrix::multiplyTransposed.
+])
+
+#showybox([
+What is the expected speedup for the distributed DistributedMatrix::multiplyTransposed operation? Compare this with the speedup you measure in your numerical experiments.
+])
+#showybox([
+Compare this distributed approach (splitting columns) with an alternative where data is partitioned among processes and gradients are synchronized afterward.])

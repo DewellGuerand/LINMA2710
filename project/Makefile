@@ -20,26 +20,29 @@ SRC_DIR ?= src
 test_matrix: tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
 	$(CXX) $(CXXFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_O1: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(O1FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O1 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_O1: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O1FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O1 tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_O2: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(O2FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O2 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_O2: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O2FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O2 tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_O3: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O3 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_O3: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O3 tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_fastmath: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fastmath tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_fastmath: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fastmath tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_native: tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(NATIVEFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_native tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_native: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(NATIVEFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_native tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_fO3 : tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3 tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_fO3: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3 tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
 
-test_matrix_perso_fO3native : tests/test_time.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(NATIVEFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3native tests/test_time.cpp $(SRC_DIR)/matrix.cpp
+test_matrix_perso_fO3native: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(NATIVEFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_fO3native tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp
+
+test_questions: tests/test_questions.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -o test_questions tests/test_questions.cpp $(SRC_DIR)/matrix.cpp
 
 
 run_matrix: test_matrix
@@ -49,8 +52,15 @@ run_matrix: test_matrix
 test_distributed: tests/test_distributed.cpp $(SRC_DIR)/distributed_matrix.cpp $(SRC_DIR)/matrix.cpp include/distributed_matrix.hpp include/matrix.hpp
 	$(MPICXX) $(CXXFLAGS) $(INCLUDE) -o test_distributed tests/test_distributed.cpp $(SRC_DIR)/distributed_matrix.cpp $(SRC_DIR)/matrix.cpp
 
+test_distributed_perso: tests/test_time_part_3.cpp $(SRC_DIR)/distributed_matrix_perso.cpp $(SRC_DIR)/matrix.cpp include/distributed_matrix.hpp include/matrix.hpp
+	$(MPICXX) $(CXXFLAGS) $(INCLUDE) -o test_distributed_perso tests/test_time_part_3.cpp $(SRC_DIR)/distributed_matrix_perso.cpp $(SRC_DIR)/matrix.cpp
+
+run_distributed_perso: test_distributed_perso
+	mpirun -np 4 ./test_distributed_perso 100 100 100
+
+
 run_distributed: test_distributed
-	mpirun -np 4 --oversubscribe ./test_distributed
+	mpirun -np 4 ./test_distributed
 
 # --- Part 4: OpenCL Matrix ---
 test_opencl: tests/test_opencl.cpp $(SRC_DIR)/matrix_opencl.cpp include/matrix_opencl.hpp
@@ -59,10 +69,12 @@ test_opencl: tests/test_opencl.cpp $(SRC_DIR)/matrix_opencl.cpp include/matrix_o
 run_opencl: test_opencl
 	./test_opencl
 
+
+
 # --- Utilities ---
 all: test_matrix test_distributed test_opencl
 
 clean:
-	rm -f test_matrix test_distributed test_opencl test_matrix_perso_O1 test_matrix_perso_O2 test_matrix_perso_O3 test_matrix_perso_fastmath test_matrix_perso_native test_matrix_perso_fO3 test_matrix_perso_fO3native
+	rm -f test_matrix test_distributed test_opencl test_matrix_perso_O1 test_matrix_perso_O2 test_matrix_perso_O3 test_matrix_perso_fastmath test_matrix_perso_native test_matrix_perso_fO3 test_matrix_perso_fO3native test_distributed_perso test_questions
 
 .PHONY: all clean run_matrix run_distributed run_opencl

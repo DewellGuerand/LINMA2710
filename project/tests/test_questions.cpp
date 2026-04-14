@@ -12,7 +12,7 @@ static void fill_random(Matrix &m, std::mt19937 &rng)
 }
 
 
-int main(int argc, char const *argv[])
+int main()
 {
     
 
