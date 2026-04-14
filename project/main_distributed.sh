@@ -1,4 +1,14 @@
 #!/bin/bash
+#SBATCH --job-name=multiplyTransposed_bench
+#SBATCH --output=logs/bench_%j.out
+#SBATCH --error=logs/bench_%j.err
+#
+#SBATCH --ntasks=8          # max de tes NODES = 8
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=500
+#SBATCH --time=01:00:00
+#SBATCH --partition=batch   # adapte selon ton cluster
+
 
 # --- Mesures de multiplyTransposed sur test_distributed_perso ---
 # Pour chaque nombre de noeuds MPI et chaque taille, on fait 5 runs.
@@ -8,8 +18,8 @@
 # CSV : Config, run1, run2, run3, run4, run5, M, N, R, metric
 # metric : t_compute | t_comm | t_total
 
-NODES=(4 8)
-SIZES=('100' '200' '400' '800')
+NODES=(1 2 4 8)
+SIZES=('100' '200' '400' '800' '1600')
 DIREC=csv
 FILES=mesures_perso_node.csv
 
@@ -27,7 +37,7 @@ for np in ${NODES[@]}; do
         t_total_runs=()
 
         for i in 1 2 3 4 5; do
-            output=$(mpirun -np "$np" ./test_distributed_perso "$sz" "$sz" "$sz" 2>/dev/null | grep -v '^#')
+            output=$(srun -n "$np" ./test_distributed_perso "$sz" "$sz" "$sz" | grep -v '^#')
             t_compute_runs+=( "$(echo "$output" | sed -n '1p' | awk '{print $1}')" )
             t_comm_runs+=(    "$(echo "$output" | sed -n '1p' | awk '{print $2}')" )
             t_total_runs+=(   "$(echo "$output" | sed -n '2p')" )
