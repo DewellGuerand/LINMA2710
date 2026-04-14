@@ -1,0 +1,18 @@
+src/matrix.cpp:75: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   75 |     #pragma omp parallel for
+      | 
+src/matrix.cpp:95: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+   95 |     #pragma omp parallel for
+      | 
+src/matrix.cpp:112: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  112 |     #pragma omp parallel for
+      | 
+src/matrix.cpp:135: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  135 |     #pragma omp parallel for
+      | 
+src/matrix.cpp:151: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  151 |     #pragma omp parallel for
+      | 
+src/matrix.cpp:167: warning: ignoring ‘#pragma omp parallel’ [-Wunknown-pragmas]
+  167 |     #pragma omp parallel for
+      | 
