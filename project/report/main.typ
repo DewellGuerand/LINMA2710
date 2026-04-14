@@ -229,6 +229,11 @@ Time to start the threads>> time for computation. Logical, maybe interesting to 
 
 = Part 3
  Reregarder le code et bien savoir expliquer le sync ect 
+Pour lancer sur le cluster : 
+- se connecter 
+- modifier le bash 
+- lancer via "sbatch mon_script.sh"
+
 #showybox([
 Profile and analyze the communication overhead (MPI operations) versus actual computation time in DistributedMatrix::multiplyTransposed.
 ])
