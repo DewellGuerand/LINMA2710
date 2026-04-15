@@ -3,7 +3,7 @@
 #SBATCH --output=logs/bench_%j.out
 #SBATCH --error=logs/bench_%j.err
 #
-#SBATCH --ntasks=8          # max de tes NODES = 8
+#SBATCH --ntasks=16          # max de tes NODES = 8
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=500
 #SBATCH --time=01:00:00
@@ -18,8 +18,8 @@
 # CSV : Config, run1, run2, run3, run4, run5, M, N, R, metric
 # metric : t_compute | t_comm | t_total
 
-NODES=(1 2 4 8)
-SIZES=('100' '200' '400' '800' '1600')
+NODES=(1 2 4 8 16)
+SIZES=('25' '50' '75' '100' '200' '400' '800' '1600')
 DIREC=csv
 FILES=mesures_perso_node.csv
 
