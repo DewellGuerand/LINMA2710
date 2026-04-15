@@ -36,6 +36,10 @@ cl::Program loadAndBuildProgram(cl::Context context,
 const std::string kernel_source_fill = R"(
     __kernel void fill(__global float* matrix, float value, int rows, int cols) {
         // TODO
+        int i = get_global_id(0);
+        if (i < rows*cols){
+            matrix[i] = value ; 
+        }
     }
 )";
 
@@ -44,6 +48,10 @@ const std::string kernel_source_add = R"(
                       __global const float* B,
                       __global float* C,
                       int rows, int cols) {
+        int i = get_global_id(0);
+        if (i < rows*cols){
+            C[i] = A[i] + B[i] ; 
+        }
         // TODO
     }
 )";
@@ -53,6 +61,10 @@ const std::string kernel_source_sub_mul = R"(
                           __global const float* B,
                           float scalar,
                           int rows, int cols) {
+        int i = get_global_id(0);
+        if (i < rows*cols){
+            A[i] = A[i] - scalar * B[i] ; 
+        }
         // TODO
     }
 )";
@@ -61,6 +73,11 @@ const std::string kernel_source_transpose = R"(
     __kernel void transpose(__global const float* A,
                             __global float* B,
                             int A_rows, int A_cols) {
+        int i = get_global_id(0);  // ligne de A
+        int j = get_global_id(1);  // colonne de A
+        if (i < A_rows && j < A_cols) {
+            B[j * A_rows + i] = A[i * A_cols + j];
+        }
         // TODO
     }
 )";
@@ -70,6 +87,15 @@ const std::string kernel_source_matrix_mul = R"(
                              __global const float* B,
                              __global float* C,
                              int A_rows, int A_cols, int B_cols) {
+        int i = get_global_id(0);  // ligne de C
+        int j = get_global_id(1);  // colonne de C
+        if (i < A_rows && j < B_cols) {
+            float sum = 0.0f;
+            for (int k = 0; k < A_cols; k++) {
+                sum += A[i * A_cols + k] * B[k * B_cols + j];
+            }
+            C[i * B_cols + j] = sum;
+        }
         // TODO
     }
 )";
@@ -133,20 +159,44 @@ size_t MatrixCL::buffer_size_bytes() const {
 MatrixCL::MatrixCL(int rows, int cols, cl::Context context, cl::CommandQueue queue, const std::vector<float>* initial_data)
     : rows_(rows), cols_(cols), context_(context), queue_(queue)
 {
+    buffer_ = cl::Buffer(context, CL_MEM_READ_WRITE, rows * cols * sizeof(float));
+
+    if (initial_data != nullptr) {
+        queue_.enqueueWriteBuffer(buffer_, CL_TRUE, 0, rows_ * cols_ * sizeof(float), initial_data->data());
+        queue_.finish();  // attendre que l'écriture soit terminée
+    }
+    else {
+        fill(0.0f);
+    }
     // TODO
+
 }
 
 MatrixCL::MatrixCL(const MatrixCL& other)
     : rows_(other.rows_), cols_(other.cols_),
       context_(other.context_), queue_(other.queue_)
 {
+    std::vector<float> copied_data ; 
+    copied_data = other.copyToHost() ; 
+    buffer_ = cl::Buffer(context_, CL_MEM_READ_WRITE, rows_ * cols_ * sizeof(float));
+    queue_.enqueueWriteBuffer(buffer_, CL_TRUE, 0, rows_ * cols_ * sizeof(float), copied_data.data());
+    queue_.finish();  // attendre que l'écriture soit terminée
+    
+   
+
+
     // TODO
 }
 
 MatrixCL& MatrixCL::operator=(const MatrixCL& other)
 {
     if (this == &other) return *this;
-
+    MatrixCL temp(other);  // appelle le copy constructor
+    rows_ = temp.rows_;
+    cols_ = temp.cols_;
+    context_ = temp.context_;
+    queue_ = temp.queue_;
+    buffer_ = temp.buffer_; 
     // TODO
 
     return *this;
@@ -163,6 +213,8 @@ std::vector<float> MatrixCL::copyToHost() const
     std::vector<float> host_data(static_cast<size_t>(rows_) * cols_);
     size_t size = buffer_size_bytes();
     if (size == 0) return host_data;
+    queue_.finish();  // POur etre sur que la queue a finit ses opérations 
+    queue_.enqueueReadBuffer(buffer_, CL_TRUE, 0, size, host_data.data());
 
     // TODO
 
@@ -172,6 +224,13 @@ std::vector<float> MatrixCL::copyToHost() const
 void MatrixCL::fill(float value)
 {
     if (rows_ * cols_ == 0) return;
+    kernels_->kernel_fill.setArg(0, buffer_);
+    kernels_->kernel_fill.setArg(1, value);
+    kernels_->kernel_fill.setArg(2, rows_);
+    kernels_->kernel_fill.setArg(3,cols_);
+    queue_.enqueueNDRangeKernel(kernels_->kernel_fill, cl::NullRange, cl::NDRange(rows_ * cols_ ), cl::NullRange);
+    queue_.finish();
+
 
     // TODO
 }
@@ -180,6 +239,17 @@ MatrixCL MatrixCL::operator+(const MatrixCL& other) const
 {
     MatrixCL result(rows_, cols_, context_, queue_);
     if (rows_ * cols_ == 0) return result;
+    kernels_->kernel_add.setArg(0,(*this).buffer_);
+    kernels_->kernel_add.setArg(1,other.buffer_);
+    kernels_->kernel_add.setArg(2,result.buffer_);
+    kernels_->kernel_add.setArg(3, rows_);
+    kernels_->kernel_add.setArg(4,cols_);
+    result.queue_.enqueueNDRangeKernel(kernels_->kernel_add, cl::NullRange, cl::NDRange(rows_ * cols_ ), cl::NullRange);
+    result.queue_.finish();
+    
+
+
+
 
     // TODO
 
@@ -190,7 +260,8 @@ MatrixCL MatrixCL::operator-(const MatrixCL& other) const
 {
     MatrixCL result(*this);
     if (rows_ * cols_ == 0) return result;
-
+    result.sub_mul(1.0f , other) ; 
+     
     // TODO
 
     return result;
@@ -200,7 +271,8 @@ MatrixCL MatrixCL::operator*(float scalar) const
 {
     MatrixCL result(rows_, cols_, context_, queue_);
     if (rows_ * cols_ == 0) return result;
-
+    result.sub_mul(- scalar , *this) ; 
+    
     // TODO
 
     return result;
@@ -212,7 +284,15 @@ MatrixCL MatrixCL::operator*(const MatrixCL& other) const
     int C_cols = other.cols_;
     MatrixCL result(C_rows, C_cols, context_, queue_);
     if (C_rows * C_cols == 0) return result;
-
+    kernels_->kernel_matrix_mul.setArg(0, buffer_);
+    kernels_->kernel_matrix_mul.setArg(1, other.buffer_);
+    kernels_->kernel_matrix_mul.setArg(2, result.buffer_);
+    kernels_->kernel_matrix_mul.setArg(3, rows_);
+    kernels_->kernel_matrix_mul.setArg(4, cols_);
+    kernels_->kernel_matrix_mul.setArg(5, other.cols_);
+    queue_.enqueueNDRangeKernel(kernels_->kernel_matrix_mul, cl::NullRange,
+                                cl::NDRange(rows_, other.cols_), cl::NullRange);
+    queue_.finish();
     // TODO
 
     return result;
@@ -222,7 +302,15 @@ MatrixCL MatrixCL::transpose() const
 {
     MatrixCL result(cols_, rows_, context_, queue_);
     if (rows_ * cols_ == 0) return result;
-
+    kernels_->kernel_transpose.setArg(0, buffer_);
+    kernels_->kernel_transpose.setArg(1, result.buffer_);
+    kernels_->kernel_transpose.setArg(2, rows_);
+    kernels_->kernel_transpose.setArg(3, cols_);
+    queue_.enqueueNDRangeKernel(kernels_->kernel_transpose, cl::NullRange, 
+                                 cl::NDRange(rows_, cols_), cl::NullRange);
+    queue_.finish();
+    
+    return result;
     // TODO
 
     return result;
@@ -231,6 +319,14 @@ MatrixCL MatrixCL::transpose() const
 void MatrixCL::sub_mul(float scalar, const MatrixCL& other)
 {
     if (rows_ * cols_ == 0) return;
+    kernels_->kernel_sub_mul.setArg(0,buffer_);
+    kernels_->kernel_sub_mul.setArg(1,other.buffer_);
+    kernels_->kernel_sub_mul.setArg(2,scalar);
+    kernels_->kernel_sub_mul.setArg(3, rows_);
+    kernels_->kernel_sub_mul.setArg(4, cols_);
+    queue_.enqueueNDRangeKernel(kernels_->kernel_sub_mul, cl::NullRange, cl::NDRange(rows_ * cols_ ), cl::NullRange);
+    queue_.finish();
+
 
     // TODO
 }
