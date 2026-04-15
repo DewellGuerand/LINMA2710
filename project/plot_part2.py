@@ -37,7 +37,7 @@ for op in operations:
     ax.grid(linestyle="--", alpha=0.5)
     fig.tight_layout()
 
-    out = os.path.join(os.path.dirname(__file__), "csv", f"plot_threads_{op}.png")
+    out = os.path.join(os.path.dirname(__file__), "report", "pics", f"plot_threads_{op}.png")
     fig.savefig(out, dpi=150)
     print(f"Sauvegardé : {out}")
 

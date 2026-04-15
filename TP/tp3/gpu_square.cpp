@@ -30,7 +30,10 @@ const std::string kernel_source_square = R"(
     __kernel void square(__global const float* x,
                          __global float* y,
                          int N) {
-        // TODO 1
+        int i = get_global_id(0);
+        if (i < N) {
+            y[i] = x[i] * x[i];
+        }
     }
 )";
 
@@ -42,7 +45,13 @@ const std::string kernel_source_square_iter = R"(
                               __global float* y,
                               int N,
                               int n_iter) {
-        // TODO 3
+        int i = get_global_id(0);
+        if (i < N) {
+            float v = x[i];
+            for (int k = 0; k < n_iter; ++k)
+                v = v * v;
+            y[i] = v;
+        }
     }
 )";
 
@@ -119,7 +128,7 @@ int main() {
         std::cerr << "No OpenCL platform found." << std::endl;
         return 1;
     }
-
+    
     cl::Platform platform = platforms.front();
     std::vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
@@ -176,7 +185,11 @@ int main() {
     // Follow the same pattern as the fill kernel above.
 
     // TODO 2 (start)
-
+    kernel_square.setArg(0, d_x);
+    kernel_square.setArg(1, d_y);
+    kernel_square.setArg(2, N);
+    queue.enqueueNDRangeKernel(kernel_square, cl::NullRange, cl::NDRange(N), cl::NullRange);
+    queue.finish();
     // TODO 2 (end)
 
     // Read back results
@@ -215,7 +228,12 @@ int main() {
     auto t_gpu_start = std::chrono::high_resolution_clock::now();
 
     // TODO 4 (start)
-
+    kernel_square_iter.setArg(0, d_x);
+    kernel_square_iter.setArg(1, d_y);
+    kernel_square_iter.setArg(2, N);
+    kernel_square_iter.setArg(3, N_ITER);
+    queue.enqueueNDRangeKernel(kernel_square_iter, cl::NullRange, cl::NDRange(N), cl::NullRange);
+    queue.finish();
     // TODO 4 (end)
 
     auto t_gpu_end = std::chrono::high_resolution_clock::now();
@@ -254,7 +272,11 @@ int main() {
     auto t_multi_start = std::chrono::high_resolution_clock::now();
 
     // TODO 5 (start)
-
+    kernel_square_inplace.setArg(0, d_z);
+    kernel_square_inplace.setArg(1, N);
+    for (int k = 0; k < N_ITER; ++k)
+        queue.enqueueNDRangeKernel(kernel_square_inplace, cl::NullRange, cl::NDRange(N), cl::NullRange);
+    queue.finish();
     // TODO 5 (end)
 
     auto t_multi_end = std::chrono::high_resolution_clock::now();

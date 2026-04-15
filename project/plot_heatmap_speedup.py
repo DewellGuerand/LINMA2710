@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_threads.csv")
-OUT_DIR  = os.path.join(os.path.dirname(__file__), "csv")
+OUT_DIR  = os.path.join(os.path.dirname(__file__), "report", "pics")
 
 df = pd.read_csv(CSV_PATH, skipinitialspace=True)
 df.columns = df.columns.str.strip()
