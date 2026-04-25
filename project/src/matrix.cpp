@@ -104,25 +104,51 @@ Matrix Matrix::operator-(const Matrix &other) const
 
 Matrix Matrix::operator*(const Matrix &other) const
 {
-    
-    
-    int R = this->rows, K = this->cols, C = other.numCols();
+    const int R = this->rows;
+    const int K = this->cols;
+    const int C = other.numCols();
+
     Matrix result(R, C);
-    Matrix otherT = other.transpose();         
-    #pragma omp parallel for
-    for (int i = 0; i < R; i++){
-        for (int j = 0; j < C; j++){
-            double sum = 0.0;
-            for (int k = 0; k < K; k++){
-                sum += this->data[i * K + k] * otherT.data[j * K + k];
+    Matrix otherT = other.transpose();
+
+    const double* __restrict__ A   = this->data.data();
+    const double* __restrict__ BT  = otherT.data.data();
+    double*       __restrict__ Res = result.data.data();
+
+    constexpr int TILE_I = 64;
+    constexpr int TILE_J = 64;
+    constexpr int TILE_K = 128;
+
+    #pragma omp parallel for schedule(static) num_threads(16) collapse(2)
+    for (int ii = 0; ii < R; ii += TILE_I)
+    for (int jj = 0; jj < C; jj += TILE_J)
+    {
+        const int iEnd = std::min(ii + TILE_I, R);
+        const int jEnd = std::min(jj + TILE_J, C);
+
+        for (int kk = 0; kk < K; kk += TILE_K)
+        {
+            const int kEnd = std::min(kk + TILE_K, K);
+
+            for (int i = ii; i < iEnd; i++)
+            {
+                const double* rowA = A + i * K;
+                for (int j = jj; j < jEnd; j++)
+                {
+                    const double* rowBT = BT + j * K;
+                    double sum = 0.0;
+
+                    #pragma omp simd reduction(+:sum)
+                    for (int k = kk; k < kEnd; k++)
+                        sum += rowA[k] * rowBT[k];
+
+                    Res[i * C + j] += sum;
+                }
             }
-            result.data[i * C + j] = sum;
         }
     }
+
     return result;
-    
-    
-    
 }
 
 Matrix Matrix::operator*(double scalar) const

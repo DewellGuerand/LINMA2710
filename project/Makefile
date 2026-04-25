@@ -18,7 +18,7 @@ SRC_DIR ?= src
 
 # --- Part 1 & 2: Basic + OpenMP Matrix ---
 test_matrix: tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
-	$(CXX) $(CXXFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp
+	$(CXX) $(CXXFLAGS) $(O3FLAGS) $(NATIVEFLAGS) $(FASTMATHFLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix tests/test_matrix.cpp $(SRC_DIR)/matrix.cpp
 
 test_matrix_perso_O1: tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp include/matrix.hpp
 	$(CXX) $(CXXFLAGS) $(O1FLAGS) $(OPENMP_FLAGS) $(INCLUDE) -o test_matrix_perso_O1 tests/test_time_part_1_2.cpp $(SRC_DIR)/matrix.cpp

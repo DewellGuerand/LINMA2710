@@ -238,8 +238,101 @@ Pour lancer sur le cluster :
 Profile and analyze the communication overhead (MPI operations) versus actual computation time in DistributedMatrix::multiplyTransposed.
 ])
 
+VOir graphique et excel fait sur le cluster du coup 
+
 #showybox([
 What is the expected speedup for the distributed DistributedMatrix::multiplyTransposed operation? Compare this with the speedup you measure in your numerical experiments.
 ])
 #showybox([
 Compare this distributed approach (splitting columns) with an alternative where data is partitioned among processes and gradients are synchronized afterward.])
+
+
+= Part 4 
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.1": *
+#show: codly-init.with()
+
+#codly(languages: codly-languages)
+```cpp
+std::vector<cl::Platform> platforms; // 
+cl::Platform::get(&platforms);
+assert(!platforms.empty());
+
+cl::Platform platform = platforms.front();
+std::cout << "Platform: " << platform.getInfo<CL_PLATFORM_NAME>() << std::endl;
+
+```
+ON récupère tous les drivers et on fait une liste exemple : NVIDIA 
+
+
+#codly(languages: codly-languages)
+```cpp
+std::vector<cl::Device> devices;
+    platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
+    if (devices.empty())
+        platform.getDevices(CL_DEVICE_TYPE_CPU, &devices);
+    assert(!devices.empty());
+
+    cl::Device device = devices.front();
+    std::cout << "Device: " << device.getInfo<CL_DEVICE_NAME>() << std::endl;
+
+```
+On récupère les types de Device donc ici les GPU's
+#codly(languages: codly-languages)
+```cpp
+cl::Context context(device);
+```
+Le Context est l'environnement partagé entre le CPU et le GPU. C'est lui qui gère la mémoire et les kernels. Il faut en créer un avant de faire quoi que ce soit.
+cde 
+#codly(languages: codly-languages)
+```cpp
+cl::CommandQueue queue(context, device, CL_QUEUE_PROFILING_ENABLE);
+```
+La CommandQueue est la file de commandes envoyées au GPU. CL_QUEUE_PROFILING_ENABLE active la mesure de temps des kernels. Les commandes sont exécutées dans l'ordre dans lequel tu les enfiles.
+
+
+EN suit on buildles kernels qui vont tourner sur les GPU's 
+
+Ici directmeent crée dans notre class kernel 
+En suit on doit créer les buffer, mettre les arguments de kernels ect. 
+#codly(languages: codly-languages)
+```cpp
+cl::Buffer d_x(context, CL_MEM_READ_ONLY,  N * sizeof(float));
+cl::Buffer d_y(context, CL_MEM_WRITE_ONLY, N * sizeof(float));
+```
+Les `Buffer` sont des zones mémoire allouées sur le GPU (VRAM). Le préfixe `d_` signifie *device*. `CL_MEM_READ_ONLY` signifie que le GPU ne peut que lire dans `d_x`, et `CL_MEM_WRITE_ONLY` que le GPU ne peut qu'écrire dans `d_y`. À ce stade les buffers sont alloués mais vides.
+
+#codly(languages: codly-languages)
+```cpp
+queue.enqueueWriteBuffer(d_x, CL_TRUE, 0, N * sizeof(float), h_x.data());
+```
+On copie les données depuis la RAM du CPU (`h_x`) vers la VRAM du GPU (`d_x`) via le bus PCIe. Le `CL_TRUE` rend l'opération *bloquante* : le CPU attend que le transfert soit terminé avant de continuer. Ce transfert est souvent le goulot d'étranglement en pratique.
+
+#codly(languages: codly-languages)
+```cpp
+kernel_square.setArg(0, d_x);
+kernel_square.setArg(1, d_y);
+kernel_square.setArg(2, N);
+queue.enqueueNDRangeKernel(kernel_square, cl::NullRange, cl::NDRange(N), cl::NullRange);
+queue.finish();
+```
+On passe les arguments au kernel via `setArg`, puis on le lance avec `enqueueNDRangeKernel`. `cl::NDRange(N)` signifie que N threads sont lancés en parallèle sur le GPU — chaque thread calcule `d_y[i] = d_x[i] * d_x[i]` pour un indice `i` différent. `queue.finish()` bloque le CPU jusqu'à ce que tous les threads aient terminé.
+
+#codly(languages: codly-languages)
+```cpp
+queue.enqueueReadBuffer(d_y, CL_TRUE, 0, N * sizeof(float), h_y_gpu.data());
+```
+Une fois le calcul terminé, on rapatrie le résultat depuis la VRAM (`d_y`) vers la RAM (`h_y_gpu`). C'est l'opération inverse du `enqueueWriteBuffer`.
+
+Le flux complet est donc :
+```
+CPU RAM          PCIe Bus         GPU VRAM
+  h_x    ──WriteBuffer──>   d_x
+                              │
+                         kernel_square
+                         (N threads en parallèle)
+                              │
+  h_y_gpu  <──ReadBuffer──   d_y
+```
+
+Okay ici quand on crée notre classe matrice elle a déjà une taille de buffer un buffer donc ici on va le crée dans l'initialisation de la classe 
