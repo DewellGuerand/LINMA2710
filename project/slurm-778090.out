@@ -1,0 +1,13 @@
+Starting DistributedMatrix tests...
+testConstructorAndBasics passed.
+testColumnDistribution passed.
+testApply passed.
+testApplyBinary passed.
+testMultiply passed.
+testMultiplyTransposed passed.
+testSum passed.
+testGather passed.
+testGetAndSet passed.
+testCopyConstructor passed.
+testCommonOperations passed.
+All distributed matrix tests passed.
