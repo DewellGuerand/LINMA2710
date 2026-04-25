@@ -243,6 +243,25 @@ VOir graphique et excel fait sur le cluster du coup
 #showybox([
 What is the expected speedup for the distributed DistributedMatrix::multiplyTransposed operation? Compare this with the speedup you measure in your numerical experiments.
 ])
+
+Ici 
+- $alpha$ = temps de démarrage : le coût fixe pour initier une communication. 
+- $beta$ = inverse de la bande passante — le coût par octet transféré
+- $gamma$ = coût par opération flottante (pour la réduction elle-même)
+- $n$ = nombre d'octets à transférer
+
+On a des $log_2$ car quand on double le nombre de processus ayant la donnée à chaque communication. 
+
+Mais ici considérons des matrices $A$ et $B$ de taille $m times n$ 
+Considérons que $P$ est le nombre de processus. Le temps de calcul est donc fait en $cal(O) (m^2 times 2n/P)$ (addition et multiplication) et le temps de communication de ```C all_reduce``` est de $cal(O)(log_2(P) alpha + beta n + gamma n)$ donc ici $=> cal(O)(log_2(P) alpha + beta m^2 + gamma m^2)$ ($m^2$ car matrice de taille $m times m$ donc autant d'élément a faire passer en communication). 
+
+Finalement on a un speedup attendu de : 
+$
+  S = (2m^2 n)/((log_2(P) alpha + beta m^2 + gamma m^2) + (m^2 times 2n/P)) 
+$
+
+So as $P -> infinity$ then $S -> 0$. Maximum obtain for some intermediate trade off. 
+
 #showybox([
 Compare this distributed approach (splitting columns) with an alternative where data is partitioned among processes and gradients are synchronized afterward.])
 

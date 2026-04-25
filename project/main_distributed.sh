@@ -21,7 +21,7 @@
 NODES=(1 2 4 8 16)
 SIZES=('25' '50' '75' '100' '200' '400' '800' '1600')
 DIREC=csv
-FILES=mesures_perso_node.csv
+FILES=mesures_perso_node__.csv
 
 echo "Config, run1, run2, run3, run4, run5, M, N, R, metric" > ${DIREC}/${FILES}
 
