@@ -104,6 +104,29 @@ Matrix Matrix::operator-(const Matrix &other) const
 
 Matrix Matrix::operator*(const Matrix &other) const
 {
+    
+    
+    int R = this->rows, K = this->cols, C = other.numCols();
+    Matrix result(R, C);
+    Matrix otherT = other.transpose();         
+    #pragma omp parallel for
+    for (int i = 0; i < R; i++){
+        for (int j = 0; j < C; j++){
+            double sum = 0.0;
+            for (int k = 0; k < K; k++){
+                sum += this->data[i * K + k] * otherT.data[j * K + k];
+            }
+            result.data[i * C + j] = sum;
+        }
+    }
+    return result;
+    
+    
+    
+}
+/*
+Matrix Matrix::operator*(const Matrix &other) const
+{
     const int R = this->rows;
     const int K = this->cols;
     const int C = other.numCols();
@@ -150,7 +173,7 @@ Matrix Matrix::operator*(const Matrix &other) const
 
     return result;
 }
-
+*/
 Matrix Matrix::operator*(double scalar) const
 {
     Matrix result(0, 0);
