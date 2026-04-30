@@ -12,10 +12,9 @@
 
 // The front slide is the first slide of your presentation
 #front-slide(
-  title: "This is a sample presentation",
-  subtitle: [Using _typslides_],
-  authors: "A. Manjavacas",
-  info: [#link("https://github.com/manjavacas/typslides")],
+  title: "Presentation Scientific computing",
+  subtitle: [LINMA2710],
+  authors: "D. Guerand",
 )
 
 // Custom outline
@@ -23,10 +22,23 @@
 
 // Title slides create new sections
 #title-slide[
-  This is a _Title slide_
+  Part 1 : Basic matrix operation and SIMD
 ]
 
 // A simple slide
+
+
+#slide[
+  - As the matrix is stored in row major we transpose 
+]
+
+#slide[
+  - Visualisation of the time taken for each operation with each flags : 
+  #figure(
+    image("pics/plot_matmul.png")
+  )
+]
+
 #slide[
   - This is a simple `slide` with no title.
   - #stress("Bold and coloured") text by using `#stress(text)`.

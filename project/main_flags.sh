@@ -1,4 +1,14 @@
 #!/bin/bash
+#SBATCH --job-name=flags
+#SBATCH --output=logs/bench_%j.out
+#SBATCH --error=logs/bench_%j.err
+#
+#SBATCH --ntasks=16          # max de tes NODES = 8
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4000
+#SBATCH --time=01:00:00
+#SBATCH --partition=batch   
+
 
 SECONDD=/usr/bin/time
 
@@ -11,7 +21,7 @@ FLAGS=('O1' 'O2' 'O3' 'fastmath' 'native' 'fO3' 'fO3native')
 # 1=addition  2=soustraction  3=matmul  4=scalaire  5=transpose  6=sub_mul
 
 OPERATIONS=(3)
-OP_NAMES=('matmul') # 'add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul'
+OP_NAMES=('add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul') # 'add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul'
 SIZES=('100' '500' '1000' '2000' '4000')
 DIREC=csv
 FILES=mesures_perso_.csv
@@ -29,9 +39,9 @@ for k in ${FLAGS[@]}; do
 
         for sz in ${SIZES[@]}; do
         # ON limite la taille des matrices pour la mult 
-            if [ $op -eq 3 ] && [ $sz -gt 500 ]; then
-                continue
-            fi
+            #if [ $op -eq 3 ] && [ $sz -gt 500 ]; then
+             #   continue
+            #fi
 
             echo -n "${k}_${name}" >> ${DIREC}/${FILES}
             for i in 1 2 3 4 5; do
