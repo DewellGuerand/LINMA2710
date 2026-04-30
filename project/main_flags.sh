@@ -3,7 +3,7 @@
 #SBATCH --output=logs/bench_%j.out
 #SBATCH --error=logs/bench_%j.err
 #
-#SBATCH --ntasks=16          # max de tes NODES = 8
+#SBATCH --ntasks=1          # max de tes NODES = 8
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=4000
 #SBATCH --time=01:00:00
