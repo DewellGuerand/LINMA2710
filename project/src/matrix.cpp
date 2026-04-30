@@ -101,7 +101,7 @@ Matrix Matrix::operator-(const Matrix &other) const
     
     return result;
 }
-
+/*
 Matrix Matrix::operator*(const Matrix &other) const
 {
     
@@ -124,7 +124,8 @@ Matrix Matrix::operator*(const Matrix &other) const
     
     
 }
-/*
+*/
+
 Matrix Matrix::operator*(const Matrix &other) const
 {
     const int R = this->rows;
@@ -138,9 +139,9 @@ Matrix Matrix::operator*(const Matrix &other) const
     const double* __restrict__ BT  = otherT.data.data();
     double*       __restrict__ Res = result.data.data();
 
-    constexpr int TILE_I = 64;
-    constexpr int TILE_J = 64;
-    constexpr int TILE_K = 128;
+    constexpr int TILE_I = 32;
+    constexpr int TILE_J = 32;
+    constexpr int TILE_K = 64;
 
     #pragma omp parallel for schedule(static) num_threads(16) collapse(2)
     for (int ii = 0; ii < R; ii += TILE_I)
@@ -173,7 +174,7 @@ Matrix Matrix::operator*(const Matrix &other) const
 
     return result;
 }
-*/
+/**/
 Matrix Matrix::operator*(double scalar) const
 {
     Matrix result(0, 0);

@@ -35,8 +35,9 @@
 
 #slide[
   - Visualisation of the time taken for each operation with each flags : 
+  - Computation made on the cluster 
   #figure(
-    image("pics/plot_matmul.png")
+    image("pics/plot_matmul_server_tilling.png")
   )
 ]
 
@@ -44,21 +45,37 @@
   Part 2 : OpenMP
 ]
 #slide[
-  Plot of computation time VS size of matrix VS number of threads
-  #figure(
-    image("pics/heatmap_matmul.png")
+  #columns(2, gutter : 1cm)[
+      Plot of computation time VS size of matrix VS number of threads *sans tilling* : 
+      #colbreak()
+      #figure(
+    image("pics/heatmap_matmu_previous.png" , width : 120% )
   )
+  ]
+
+  
+]
+#slide[
+  #columns(2, gutter : 1cm)[
+      Plot of computation time VS size of matrix VS number of threads *avec tilling* : 
+      #colbreak()
+      #figure(
+    image("pics/heatmap_matmul_tilling.png" , width : 120% )
+  )
+  ]
+
+  
 ]
 
 #title-slide[
-  Part 2 : Distributed matrix operations (MPI)
+  Part 3 : Distributed matrix operations (MPI)
 ]
 
 #slide[
 
 ]
 #title-slide[
-  Part 2 : GPU Matrix Operations (OpenCL)
+  Part 4 : GPU Matrix Operations (OpenCL)
 ]
 
 
