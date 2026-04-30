@@ -30,6 +30,7 @@
 
 #slide[
   - As the matrix is stored in row major we transpose 
+  - We also do tilling to have a more efficient memory access
 ]
 
 #slide[
@@ -38,6 +39,29 @@
     image("pics/plot_matmul.png")
   )
 ]
+
+#title-slide[
+  Part 2 : OpenMP
+]
+#slide[
+  Plot of computation time VS size of matrix VS number of threads
+  #figure(
+    image("pics/heatmap_matmul.png")
+  )
+]
+
+#title-slide[
+  Part 2 : Distributed matrix operations (MPI)
+]
+
+#slide[
+
+]
+#title-slide[
+  Part 2 : GPU Matrix Operations (OpenCL)
+]
+
+
 
 #slide[
   - This is a simple `slide` with no title.

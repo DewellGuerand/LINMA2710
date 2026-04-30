@@ -20,7 +20,7 @@ FLAGS=('O1' 'O2' 'O3' 'fastmath' 'native' 'fO3' 'fO3native')
 #
 # 1=addition  2=soustraction  3=matmul  4=scalaire  5=transpose  6=sub_mul
 
-OPERATIONS=(3)
+OPERATIONS=(1 2 3 4 5 6)
 OP_NAMES=('add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul') # 'add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul'
 SIZES=('100' '500' '1000' '2000' '4000')
 DIREC=csv
