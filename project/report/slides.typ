@@ -49,7 +49,7 @@
       Plot of computation time VS size of matrix VS number of threads *sans tilling* : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmul.png" , width : 120% )
+    image("pics/heatmap_matmu_previous.png" , width : 120% )
   )
   ]
 
@@ -60,7 +60,7 @@
       Plot of computation time VS size of matrix VS number of threads *avec tilling* : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmul.png" , width : 120% )
+    image("pics/heatmap_matmul_tilling.png" , width : 120% )
   )
   ]
 
