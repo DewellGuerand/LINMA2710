@@ -30,8 +30,7 @@
 
 #slide[
   - As the matrix is stored in row major we transpose to optimise for cach miss. 
-  - We also do tilling to have a more efficient memory access. 
-  - Parler de arithmétic intensity
+  - We also do tilling to have a more efficient memory access (see later on)
 ]
 
 #slide[
@@ -39,6 +38,9 @@
   - Computation made on the cluster 
   #figure(
     image("pics/plot_matmul_server_tilling.png")
+  )
+  #figure(
+    image("pics/plot_matmul_server_tilling.png") // NOrmally flags on my computer gota relaunch to highlight the difference when better CPU
   )
 ]
 
@@ -50,7 +52,7 @@
       Plot of computation time VS size of matrix VS number of threads *sans tilling* : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmul_previous.png" , width : 120% )
+    image("pics/heatmap_matmul_previous_server.png" , width : 120% ) // CLearly see the diminution of time 
   )
   ]
 
@@ -61,7 +63,7 @@
       Plot of computation time VS size of matrix VS number of threads *avec tilling* : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmul_tilling.png" , width : 120% )
+    image("pics/heatmap_matmul_tilling.png" , width : 120% ) // DOes not have a diminution of time 
   )
   ]
 

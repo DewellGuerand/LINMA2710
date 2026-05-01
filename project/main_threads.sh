@@ -48,7 +48,7 @@ for t in ${THREADS[@]}; do
 
             echo -n "${FLAGS}_${name}" >> ${DIREC}/${FILES}
             for i in 1 2 3 4 5; do
-                TIME=$(OMP_NUM_THREADS=$t srun ./test_matrix_perso_${FLAGS} $op $sz $sz $sz)
+                TIME=$(OMP_NUM_THREADS=$t ./test_matrix_perso_${FLAGS} $op $sz $sz $sz)
                 echo -n ", $TIME" >> ${DIREC}/${FILES}
             done
             echo ", $sz, $sz, $sz, $op , $t" >> ${DIREC}/${FILES}
