@@ -22,14 +22,13 @@ OPERATIONS=(1 2 3 4 5 6)
 OP_NAMES=('add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul')
 SIZES=('10' '25' '50' '100' '500' '1000' '2000' '4000')
 DIREC=csv
-FILES=mesures_perso_threads_on_server_previous_imp.csv
+FILES=mesures_perso_threads.csv
 THREADS=(1 2 4 8)
 
 echo "Config, run1, run2, run3, run4, run5, M, N, R, operation , threads" > csv/${FILES}
 
 
 # Compiler une seule fois par flag
-
 
 for t in ${THREADS[@]}; do
     export OMP_NUM_THREADS=$t
@@ -47,7 +46,7 @@ for t in ${THREADS[@]}; do
 
             echo -n "${FLAGS}_${name}" >> ${DIREC}/${FILES}
             for i in 1 2 3 4 5; do
-                TIME=$(OMP_NUM_THREADS=$t ./test_matrix_perso_${FLAGS} $op $sz $sz $sz)
+                TIME=$(OMP_NUM_THREADS=$t srun ./test_matrix_perso_${FLAGS} $op $sz $sz $sz)
                 echo -n ", $TIME" >> ${DIREC}/${FILES}
             done
             echo ", $sz, $sz, $sz, $op , $t" >> ${DIREC}/${FILES}

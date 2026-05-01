@@ -29,8 +29,9 @@
 
 
 #slide[
-  - As the matrix is stored in row major we transpose 
-  - We also do tilling to have a more efficient memory access
+  - As the matrix is stored in row major we transpose to optimise for cach miss. 
+  - We also do tilling to have a more efficient memory access. 
+  - Parler de arithmétic intensity
 ]
 
 #slide[
@@ -49,7 +50,7 @@
       Plot of computation time VS size of matrix VS number of threads *sans tilling* : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmu_previous.png" , width : 120% )
+    image("pics/heatmap_matmul_previous.png" , width : 120% )
   )
   ]
 
