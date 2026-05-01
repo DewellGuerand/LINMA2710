@@ -105,7 +105,7 @@ const std::string kernel_source_matrix_mul = R"(
 void KernelCache::compileKernels(cl::Context context, const std::vector<cl::Device>& devices) {
     if (initialized) return;
 
-    std::cout << "Compiling OpenCL kernels..." << std::endl;
+    std::cerr << "Compiling OpenCL kernels..." << std::endl;
     try {
         cl::Program prog_fill = loadAndBuildProgram(context, devices, kernel_source_fill, "fill");
         kernel_fill = cl::Kernel(prog_fill, "fill");
@@ -123,7 +123,7 @@ void KernelCache::compileKernels(cl::Context context, const std::vector<cl::Devi
         kernel_matrix_mul = cl::Kernel(prog_matrix_mul, "matrix_mul");
 
         initialized = true;
-        std::cout << "OpenCL kernels compiled successfully." << std::endl;
+        std::cerr << "OpenCL kernels compiled successfully." << std::endl;
 
     } catch (const std::exception& e) {
         std::cerr << "Failed to compile one or more OpenCL kernels. Aborting." << std::endl;
@@ -136,7 +136,7 @@ void KernelCache::compileKernels(cl::Context context, const std::vector<cl::Devi
 void MatrixCL::initializeKernels(cl::Context context, const std::vector<cl::Device>& devices) {
     try {
         if (!kernels_ || !kernels_->initialized) {
-            std::cout << "Creating and compiling kernels..." << std::endl;
+            std::cerr << "Creating and compiling kernels..." << std::endl;
             kernels_ = std::make_shared<KernelCache>();
             kernels_->compileKernels(context, devices);
         }
