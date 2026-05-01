@@ -30,6 +30,7 @@ echo "Config, run1, run2, run3, run4, run5, M, N, R, operation , threads" > csv/
 
 # Compiler une seule fois par flag
 
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 for t in ${THREADS[@]}; do
     export OMP_NUM_THREADS=$t

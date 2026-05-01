@@ -101,7 +101,7 @@ Matrix Matrix::operator-(const Matrix &other) const
     
     return result;
 }
-/*
+
 Matrix Matrix::operator*(const Matrix &other) const
 {
     
@@ -124,8 +124,9 @@ Matrix Matrix::operator*(const Matrix &other) const
     
     
 }
-*/
 
+/**/
+/*
 Matrix Matrix::operator*(const Matrix &other) const
 {
     const int R = this->rows;
@@ -174,7 +175,7 @@ Matrix Matrix::operator*(const Matrix &other) const
 
     return result;
 }
-/**/
+*/
 Matrix Matrix::operator*(double scalar) const
 {
     Matrix result(0, 0);
