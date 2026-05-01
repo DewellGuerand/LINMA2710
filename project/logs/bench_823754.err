@@ -1,0 +1,736 @@
+src/matrix.cpp:130:8: error: redefinition of ‘Matrix Matrix::operator*(const Matrix&) const’
+  130 | Matrix Matrix::operator*(const Matrix &other) const
+      |        ^~~~~~
+src/matrix.cpp:105:8: note: ‘Matrix Matrix::operator*(const Matrix&) const’ previously defined here
+  105 | Matrix Matrix::operator*(const Matrix &other) const
+      |        ^~~~~~
+make: *** [Makefile:42: test_matrix_perso_fO3native] Error 1
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+src/matrix.cpp:130:8: error: redefinition of ‘Matrix Matrix::operator*(const Matrix&) const’
+  130 | Matrix Matrix::operator*(const Matrix &other) const
+      |        ^~~~~~
+src/matrix.cpp:105:8: note: ‘Matrix Matrix::operator*(const Matrix&) const’ previously defined here
+  105 | Matrix Matrix::operator*(const Matrix &other) const
+      |        ^~~~~~
+make: *** [Makefile:42: test_matrix_perso_fO3native] Error 1
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+slurmstepd: error: execve(): /home/users/g/d/gdewell/LINMA2710/project/./test_matrix_perso_fO3native: No such file or directory
+srun: error: ly-w101: task 0: Exited with exit code 2
+srun: StepId=823754.359 aborted before step completely launched.
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 823754 ON ly-w101 CANCELLED AT 2026-05-01T13:26:02 ***
+slurmstepd: error: *** STEP 823754.359 ON ly-w101 CANCELLED AT 2026-05-01T13:26:02 ***
