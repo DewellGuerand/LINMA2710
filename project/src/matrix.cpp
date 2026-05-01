@@ -145,7 +145,7 @@ Matrix Matrix::operator*(const Matrix &other) const
     constexpr int TILE_J = 64;
     constexpr int TILE_K = 128;
 
-    #pragma omp parallel for schedule(static) num_threads(16) collapse(2)
+    #pragma omp parallel for schedule(static) collapse(2)
     for (int ii = 0; ii < R; ii += TILE_I)
     for (int jj = 0; jj < C; jj += TILE_J)
     {

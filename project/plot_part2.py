@@ -1,10 +1,18 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import argparse
 
-CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_threads.csv")
+DEFAULT_CSV = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_threads.csv")
 
-df = pd.read_csv(CSV_PATH, skipinitialspace=True)
+parser = argparse.ArgumentParser(description="Temps d'exécution vs threads par opération")
+parser.add_argument("--csv", default=DEFAULT_CSV, help="Chemin vers le fichier CSV")
+parser.add_argument("--op", nargs="+", help="Opération(s) à afficher (défaut : toutes)")
+args = parser.parse_args()
+
+csv_stem = os.path.splitext(os.path.basename(args.csv))[0]
+
+df = pd.read_csv(args.csv, skipinitialspace=True)
 df.columns = df.columns.str.strip()
 
 df[["flag", "op_name"]] = df["Config"].str.split("_", n=1, expand=True)
@@ -12,12 +20,15 @@ df[["flag", "op_name"]] = df["Config"].str.split("_", n=1, expand=True)
 run_cols = ["run1", "run2", "run3", "run4", "run5"]
 df[run_cols] = df[run_cols].apply(pd.to_numeric, errors="coerce")
 df["mean_time"] = df[run_cols].mean(axis=1)
-df["size"] = df["M"].astype(int)
+df["size"]    = df["M"].astype(int)
 df["threads"] = df["threads"].astype(int)
 
 operations = df["op_name"].unique()
-sizes      = sorted(df["size"].unique())
-colors     = ["steelblue", "darkorange", "seagreen", "darkred", "purple", "brown"]
+if args.op:
+    operations = [op for op in operations if op in args.op]
+
+sizes  = sorted(df["size"].unique())
+colors = ["steelblue", "darkorange", "seagreen", "darkred", "purple", "brown"]
 
 for op in operations:
     fig, ax = plt.subplots(figsize=(9, 5))
@@ -37,8 +48,8 @@ for op in operations:
     ax.grid(linestyle="--", alpha=0.5)
     fig.tight_layout()
 
-    out = os.path.join(os.path.dirname(__file__), "report", "pics", f"plot_threads_{op}.png")
-    fig.savefig(out, dpi=150)
+    out = os.path.join(os.path.dirname(__file__), "report", "pics", f"{csv_stem}_threads_{op}.svg")
+    fig.savefig(out)
     print(f"Sauvegardé : {out}")
 
 plt.show()

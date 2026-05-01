@@ -1,37 +1,39 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 import os
+import argparse
 
-CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_on_server_tilling.csv")
+DEFAULT_CSV = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_on_server_tilling.csv")
 
-# --- Chargement ---
-df = pd.read_csv(CSV_PATH, skipinitialspace=True)
+parser = argparse.ArgumentParser(description="Barres groupées par opération et flag")
+parser.add_argument("--csv", default=DEFAULT_CSV, help="Chemin vers le fichier CSV")
+parser.add_argument("--op", nargs="+", help="Opération(s) à afficher (défaut : toutes)")
+args = parser.parse_args()
+
+csv_stem = os.path.splitext(os.path.basename(args.csv))[0]
+
+df = pd.read_csv(args.csv, skipinitialspace=True)
 df.columns = df.columns.str.strip()
 
-# Extraire flag (O1/O2/O3) et opération depuis la colonne Config (ex: "O1_add")
 df[["flag", "op_name"]] = df["Config"].str.split("_", n=1, expand=True)
 
-# Colonnes de temps
 run_cols = ["run1", "run2", "run3", "run4", "run5"]
 df[run_cols] = df[run_cols].apply(pd.to_numeric, errors="coerce")
-
-# Meilleur temps = minimum des 5 runs
 df["best"] = df[run_cols].mean(axis=1)
-
-# Taille de matrice (on utilise M)
 df["size"] = df["M"].astype(int)
 
-# --- Tracé ---
 operations = df["op_name"].unique()
-flags      = sorted(df["flag"].unique())   # O1, O2, O3
-sizes      = sorted(df["size"].unique())
+if args.op:
+    operations = [op for op in operations if op in args.op]
 
-n_flags  = len(flags)
-x        = np.arange(len(sizes))
-width    = 0.8 / n_flags                  # largeur d'un bâtonnet
-colors   = ["steelblue", "darkorange", "seagreen" , "darkred" , "purple" , "brown"  ]
+flags  = sorted(df["flag"].unique())
+sizes  = sorted(df["size"].unique())
+
+n_flags = len(flags)
+x       = np.arange(len(sizes))
+width   = 0.8 / n_flags
+colors  = ["steelblue", "darkorange", "seagreen", "darkred", "purple", "brown"]
 
 for op in operations:
     fig, ax = plt.subplots(figsize=(9, 5))
@@ -52,8 +54,8 @@ for op in operations:
     ax.grid(axis="y", linestyle="--", alpha=0.5)
     fig.tight_layout()
 
-    out = os.path.join(os.path.dirname(__file__), "report", "pics", f"plot_{op}.png")
-    fig.savefig(out, dpi=150)
+    out = os.path.join(os.path.dirname(__file__), "report", "pics", f"{csv_stem}_{op}.svg")
+    fig.savefig(out)
     print(f"Sauvegardé : {out}")
 
 plt.show()
