@@ -81,7 +81,7 @@ const std::string kernel_source_transpose = R"(
         // TODO
     }
 )";
-
+/*
 const std::string kernel_source_matrix_mul = R"(
     __kernel void matrix_mul(__global const float* A,
                              __global const float* B,
@@ -98,6 +98,64 @@ const std::string kernel_source_matrix_mul = R"(
         }
         // TODO
     }
+)"; */
+const std::string kernel_source_matrix_mul = R"(
+#define TILE_SIZE 16
+
+__kernel void matrix_mul(
+    __global const float* A,
+    __global const float* B,
+    __global float* C,
+    int A_rows, int A_cols, int B_cols)
+{
+    // Tuiles en mémoire locale (partagée au sein du work-group)
+    __local float tileA[TILE_SIZE][TILE_SIZE];
+    __local float tileB[TILE_SIZE][TILE_SIZE];
+
+    // Coordonnées globales du résultat C que ce work-item calcule
+    int row = get_global_id(0);  // ligne de C
+    int col = get_global_id(1);  // colonne de C
+
+    // Coordonnées locales dans le work-group (pour charger les tuiles)
+    int local_row = get_local_id(0);
+    int local_col = get_local_id(1);
+
+    float acc = 0.0f;
+
+    // Nombre de tuiles à parcourir le long de la dimension partagée (A_cols)
+    int num_tiles = (A_cols + TILE_SIZE - 1) / TILE_SIZE;
+
+    for (int t = 0; t < num_tiles; t++) {
+
+        // --- Chargement collaboratif de la tuile de A en mémoire locale ---
+        int a_col = t * TILE_SIZE + local_col;
+        if (row < A_rows && a_col < A_cols)
+            tileA[local_row][local_col] = A[row * A_cols + a_col];
+        else
+            tileA[local_row][local_col] = 0.0f;
+
+        // --- Chargement collaboratif de la tuile de B en mémoire locale ---
+        int b_row = t * TILE_SIZE + local_row;
+        if (b_row < A_cols && col < B_cols)
+            tileB[local_row][local_col] = B[b_row * B_cols + col];
+        else
+            tileB[local_row][local_col] = 0.0f;
+
+        // Attendre que tous les work-items du groupe aient fini de charger
+        barrier(CLK_LOCAL_MEM_FENCE);
+
+        // --- Calcul du produit partiel sur cette tuile ---
+        for (int k = 0; k < TILE_SIZE; k++)
+            acc += tileA[local_row][k] * tileB[k][local_col];
+
+        // Attendre avant de charger la tuile suivante
+        barrier(CLK_LOCAL_MEM_FENCE);
+    }
+
+    // Écriture du résultat final en mémoire globale
+    if (row < A_rows && col < B_cols)
+        C[row * B_cols + col] = acc;
+}
 )";
 
 // --- KernelCache ---
