@@ -79,8 +79,8 @@ run_opencl: test_opencl
 test_time_opencl_perso: tests/test_time_part_4.cpp $(SRC_DIR)/matrix_opencl.cpp include/matrix_opencl.hpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -o test_opencl_perso tests/test_time_part_4.cpp $(SRC_DIR)/matrix_opencl.cpp -lOpenCL
 
-run_time_opencl_perso: test_time_part_4
-	./test_time_part_4 512 512 512
+run_time_opencl_perso: test_opencl_perso
+	./test_opencl_perso 512 512 512
 
 
 
