@@ -49,10 +49,19 @@
 ]
 #slide[
   #columns(2, gutter : 1cm)[
-      Plot of computation time VS size of matrix VS number of threads *sans tilling* : 
+      Plot of computation time VS size of matrix VS number of threads *sans tilling* on my pc : 
       #colbreak()
       #figure(
-    image("pics/heatmap_matmul_previous_server.png" , width : 120% ) // CLearly see the diminution of time 
+    image("pics/heatmap_matmul_previous_my_pc.png" , width : 120% ) // CLearly see the diminution of time AND the time to start the thread 
+  )
+  ]
+]
+#slide[
+  #columns(2, gutter : 1cm)[
+      Plot of computation time VS size of matrix VS number of threads *sans tilling* on the server : 
+      #colbreak()
+      #figure(
+    image("pics/heatmap_matmul_previous_server.png" , width : 120% ) // CLearly see the diminution of time but no time to begin 
   )
   ]
 

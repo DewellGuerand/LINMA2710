@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_threads_on_server_previous_imp.csv")
+CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_threads_my_pc_previous.csv")
 OUT_DIR  = os.path.join(os.path.dirname(__file__), "report", "pics")
 
 df = pd.read_csv(CSV_PATH, skipinitialspace=True)

@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import os
 
-CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_on_server.csv")
+CSV_PATH = os.path.join(os.path.dirname(__file__), "csv", "mesures_perso_on_server_tilling.csv")
 
 # --- Chargement ---
 df = pd.read_csv(CSV_PATH, skipinitialspace=True)
