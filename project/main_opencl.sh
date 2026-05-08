@@ -11,9 +11,9 @@
 
 # CSV produit : M,run1,run2,run3,run4,run5
 
-SIZES=('25' '50' '75' '100' '200' '400' '800' '1600' '3200' '6400' '12800')
+SIZES=('25' '50' '75' '100' '200' '400' '800' '1600' '3200' '6400')
 DIREC=csv
-FILE=mesures_perso_opencl.csv
+FILE=mesures_perso_opencl_fast.csv
 
 echo "M,run1,run2,run3,run4,run5" > ${DIREC}/${FILE}
 
