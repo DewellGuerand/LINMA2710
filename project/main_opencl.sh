@@ -25,8 +25,13 @@ for sz in "${SIZES[@]}"; do
     times=()
     for i in 1 2 3 4 5; do
         # stdout -> "M,N,R,avg_ms"   stderr -> diagnostics (bench_opencl_*.err)
-        output=$(srun ./test_opencl_perso "$sz" "$sz" "$sz" 2>/dev/null)
+        output=$(srun ./test_opencl_perso "$sz" "$sz" "$sz")
+        exit_code=$?
         t=$(echo "$output" | cut -d',' -f4)
+        if [ $exit_code -ne 0 ] || [ -z "$t" ]; then
+            echo "FAILED for sz=$sz (exit $exit_code)" >&2
+            t="NA"
+        fi
         times+=("$t")
     done
 
