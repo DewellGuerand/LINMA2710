@@ -137,15 +137,15 @@ Matrix Matrix::operator*(const Matrix &other) const
     Matrix result(R, C);
     Matrix otherT = other.transpose();
 
-    const double* __restrict__ A   = this->data.data();
+    const double*  __restrict__ A   = this->data.data();
     const double* __restrict__ BT  = otherT.data.data();
     double*       __restrict__ Res = result.data.data();
 
-    constexpr int TILE_I = 128;
-    constexpr int TILE_J = 128;
+    constexpr int TILE_I = 64;
+    constexpr int TILE_J = 64;
     constexpr int TILE_K = 64;
 
-    #pragma omp parallel for schedule(dynamic, 1)
+    #pragma omp parallel for collapse(2) schedule(static)
     for (int ii = 0; ii < R; ii += TILE_I)
     for (int jj = 0; jj < C; jj += TILE_J)
     {
@@ -163,7 +163,7 @@ Matrix Matrix::operator*(const Matrix &other) const
                 for (int j = jj; j < jEnd - 7; j += 8)
                 {
                     double sum0 = 0.0, sum1 = 0.0, sum2 = 0.0, sum3 = 0.0, sum4 = 0.0, sum5 =0.0 , sum6=0.0 , sum7 = 0.0;
-
+                    
                     for (int k = kk; k < kEnd; k++)
                     {
                         double a = rowA[k];
@@ -186,9 +186,7 @@ Matrix Matrix::operator*(const Matrix &other) const
                     Res[i * C + (j+5)] += sum5;
                     Res[i * C + (j+6)] += sum6;
                     Res[i * C + (j+7)] += sum7;
-
-
-
+                    
                 }
 
                 for (int j = jj + ((jEnd - jj) / 8) * 8; j < jEnd; j++)

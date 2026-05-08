@@ -22,7 +22,7 @@ OPERATIONS=(1 2 3 4 5 6)
 OP_NAMES=('add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul')
 SIZES=('10' '25' '50' '100' '500' '1000' '2000' '4000')
 DIREC=csv
-FILES=mesures_perso_threads__my_pc_tilling.csv
+FILES=mesures_perso_threads__my_pc_tilling_test.csv
 THREADS=(1 2 4 8)
 
 echo "Config, run1, run2, run3, run4, run5, M, N, R, operation , threads" > csv/${FILES}
