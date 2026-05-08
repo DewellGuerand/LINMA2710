@@ -61,7 +61,7 @@ void Matrix::fill(double value)
         for (int j = 0 ; j < this->cols ; j++){
            this->data[i * this->cols + j] = value ; 
         }
-    }
+    }     
 }
 
 Matrix Matrix::operator+(const Matrix &other) const

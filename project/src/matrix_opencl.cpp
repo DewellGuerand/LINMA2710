@@ -81,82 +81,71 @@ const std::string kernel_source_transpose = R"(
         // TODO
     }
 )";
-/*
-const std::string kernel_source_matrix_mul = R"(
-    __kernel void matrix_mul(__global const float* A,
-                             __global const float* B,
-                             __global float* C,
-                             int A_rows, int A_cols, int B_cols) {
-        int i = get_global_id(0);  // ligne de C
-        int j = get_global_id(1);  // colonne de C
-        if (i < A_rows && j < B_cols) {
-            float sum = 0.0f;
-            for (int k = 0; k < A_cols; k++) {
-                sum += A[i * A_cols + k] * B[k * B_cols + j];
-            }
-            C[i * B_cols + j] = sum;
-        }
-        // TODO
-    }
-)"; */
-const std::string kernel_source_matrix_mul = R"(
-#define TILE_SIZE 16
 
-__kernel void matrix_mul(
-    __global const float* A,
-    __global const float* B,
-    __global float* C,
-    int A_rows, int A_cols, int B_cols)
-{
-    // Tuiles en mémoire locale (partagée au sein du work-group)
-    __local float tileA[TILE_SIZE][TILE_SIZE];
-    __local float tileB[TILE_SIZE][TILE_SIZE];
+// const std::string kernel_source_matrix_mul = R"(
+//     __kernel void matrix_mul(__global const float* A,
+//                              __global const float* B,
+//                              __global float* C,
+//                              int A_rows, int A_cols, int B_cols) {
+//         int i = get_global_id(0);  // ligne de C
+//         int j = get_global_id(1);  // colonne de C
+//         if (i < A_rows && j < B_cols) {
+//             float sum = 0.0f;
+//             for (int k = 0; k < A_cols; k++) {
+//                 sum += A[i * A_cols + k] * B[k * B_cols + j];
+//             }
+//             C[i * B_cols + j] = sum;
+//         }
+//         TODO
+//     }
+// )"; 
 
-    // Coordonnées globales du résultat C que ce work-item calcule
-    int row = get_global_id(0);  // ligne de C
-    int col = get_global_id(1);  // colonne de C
+ const std::string kernel_source_matrix_mul = R"(
+__kernel void matrix_mul(__global const float* A,
+                         __global const float* B,
+                         __global float* C,        // pas const !
+                         int A_rows, int A_cols, int B_cols) {
+    
+    #define TILE 16
+    __local float tileA[TILE][TILE];   // taille fixe connue à la compilation
+    __local float tileB[TILE][TILE];
 
-    // Coordonnées locales dans le work-group (pour charger les tuiles)
-    int local_row = get_local_id(0);
-    int local_col = get_local_id(1);
+    int ii = get_local_id(0);
+    int jj = get_local_id(1);
+    int i = get_group_id(0) * TILE + ii;
+    int j = get_group_id(1) * TILE + jj;
 
-    float acc = 0.0f;
+    float sum = 0.0f;
 
-    // Nombre de tuiles à parcourir le long de la dimension partagée (A_cols)
-    int num_tiles = (A_cols + TILE_SIZE - 1) / TILE_SIZE;
+    for (int h = 0; h < A_cols; h += TILE) {
 
-    for (int t = 0; t < num_tiles; t++) {
-
-        // --- Chargement collaboratif de la tuile de A en mémoire locale ---
-        int a_col = t * TILE_SIZE + local_col;
-        if (row < A_rows && a_col < A_cols)
-            tileA[local_row][local_col] = A[row * A_cols + a_col];
+        // Charger tileA
+        if (i < A_rows && h + jj < A_cols)
+            tileA[ii][jj] = A[i * A_cols + h + jj];
         else
-            tileA[local_row][local_col] = 0.0f;
+            tileA[ii][jj] = 0.0f;
 
-        // --- Chargement collaboratif de la tuile de B en mémoire locale ---
-        int b_row = t * TILE_SIZE + local_row;
-        if (b_row < A_cols && col < B_cols)
-            tileB[local_row][local_col] = B[b_row * B_cols + col];
+        // Charger tileB
+        if (h + ii < A_cols && j < B_cols)
+            tileB[ii][jj] = B[(h + ii) * B_cols + j];
         else
-            tileB[local_row][local_col] = 0.0f;
+            tileB[ii][jj] = 0.0f;
 
-        // Attendre que tous les work-items du groupe aient fini de charger
+        // Attendre que tous les threads aient fini de charger
         barrier(CLK_LOCAL_MEM_FENCE);
 
-        // --- Calcul du produit partiel sur cette tuile ---
-        for (int k = 0; k < TILE_SIZE; k++)
-            acc += tileA[local_row][k] * tileB[k][local_col];
+        // Accumuler depuis la mémoire locale (rapide)
+        for (int k = 0; k < TILE; k++)
+            sum += tileA[ii][k] * tileB[k][jj];
 
-        // Attendre avant de charger la tuile suivante
+        // Attendre avant d'écraser les tiles au prochain tour
         barrier(CLK_LOCAL_MEM_FENCE);
     }
 
-    // Écriture du résultat final en mémoire globale
-    if (row < A_rows && col < B_cols)
-        C[row * B_cols + col] = acc;
-}
-)";
+    if (i < A_rows && j < B_cols)
+        C[i * B_cols + j] = sum;
+})";
+
 
 // --- KernelCache ---
 
@@ -348,8 +337,10 @@ MatrixCL MatrixCL::operator*(const MatrixCL& other) const
     kernels_->kernel_matrix_mul.setArg(3, rows_);
     kernels_->kernel_matrix_mul.setArg(4, cols_);
     kernels_->kernel_matrix_mul.setArg(5, other.cols_);
+    int global_rows = ((rows_ + 15) / 16) * 16;
+    int global_cols = ((other.cols_ + 15) / 16) * 16;
     queue_.enqueueNDRangeKernel(kernels_->kernel_matrix_mul, cl::NullRange,
-                                cl::NDRange(rows_, other.cols_), cl::NullRange);
+                                cl::NDRange(global_rows, global_cols),cl::NDRange(16, 16));
     queue_.finish();
     // TODO
 
