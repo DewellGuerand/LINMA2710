@@ -1,0 +1,13 @@
+In file included from include/matrix_opencl.hpp:7,
+                 from tests/test_time_part_4.cpp:1:
+include/CL/opencl.hpp:541:10: fatal error: CL/opencl.h: No such file or directory
+  541 | #include <CL/opencl.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from include/matrix_opencl.hpp:7,
+                 from src/matrix_opencl.cpp:1:
+include/CL/opencl.hpp:541:10: fatal error: CL/opencl.h: No such file or directory
+  541 | #include <CL/opencl.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:80: test_time_opencl_perso] Error 1
