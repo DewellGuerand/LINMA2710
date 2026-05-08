@@ -1,10 +1,11 @@
 """
 Measure energy consumption of the OpenCL matrix multiply binary using CodeCarbon.
-Usage:
-    python measure_energy.py <M> <N> <R> [--runs N]
 
-Example:
-    python measure_energy.py 512 512 512 --runs 5
+Single size:
+    python measure_energy.py 512 512 512 [--runs 3]
+
+Sweep all default sizes:
+    python measure_energy.py --sweep [--runs 3] [--output energy_results.csv]
 """
 
 import subprocess
@@ -15,6 +16,7 @@ import os
 from codecarbon import EmissionsTracker
 
 BINARY = "./test_opencl_perso"
+DEFAULT_SIZES = [25, 50, 100, 200, 400, 800, 1600, 3200]
 
 
 def run_once(m, n, r):
@@ -23,73 +25,65 @@ def run_once(m, n, r):
         capture_output=True, text=True
     )
     if result.returncode != 0:
-        print(result.stderr, file=sys.stderr)
-        raise RuntimeError(f"Binary failed with code {result.returncode}")
-    # stderr has device info, stdout has the CSV row
+        print(result.stderr.strip(), file=sys.stderr)
+        raise RuntimeError(f"Binary failed (exit {result.returncode})")
     print(result.stderr.strip(), file=sys.stderr)
     return result.stdout.strip()  # "M,N,R,time_ms"
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("M", type=int)
-    parser.add_argument("N", type=int)
-    parser.add_argument("R", type=int)
-    parser.add_argument("--runs", type=int, default=5)
-    parser.add_argument("--output", default="energy_results.csv")
-    args = parser.parse_args()
+def measure_size(m, n, r, runs, output):
+    print(f"\n{'='*50}", file=sys.stderr)
+    print(f"Matrice {m}x{n} * {n}x{r}  ({runs} runs)", file=sys.stderr)
 
-    if not os.path.exists(BINARY):
-        print(f"Binary not found: {BINARY}. Run: make test_time_opencl_perso", file=sys.stderr)
-        sys.exit(1)
-
-    # Warm-up run (not tracked) to avoid JIT overhead in energy measurement
-    print("Warm-up run...", file=sys.stderr)
-    run_once(args.M, args.N, args.R)
+    print("  Warm-up...", file=sys.stderr)
+    try:
+        run_once(m, n, r)
+    except RuntimeError as e:
+        print(f"  ECHEC warm-up: {e} -> skip", file=sys.stderr)
+        return
 
     tracker = EmissionsTracker(
         project_name="opencl_matmul",
-        output_file="codecarbon_emissions.csv",
-        log_level="error",   # suppress verbose logging
+        output_file="csv/codecarbon_raw.csv",
+        log_level="error",
         measure_power_secs=1,
         save_to_file=True,
     )
 
-    print(f"Measuring {args.runs} run(s) of {args.M}x{args.N} * {args.N}x{args.R}...", file=sys.stderr)
-
     tracker.start()
     timing_rows = []
-    for i in range(args.runs):
-        row = run_once(args.M, args.N, args.R)
-        timing_rows.append(row)
-        print(f"  Run {i+1}/{args.runs}: {row} (M,N,R,time_ms)", file=sys.stderr)
+    try:
+        for i in range(runs):
+            row = run_once(m, n, r)
+            timing_rows.append(row)
+            t = row.split(",")[3]
+            print(f"  Run {i+1}/{runs}: {t} ms", file=sys.stderr)
+    except RuntimeError as e:
+        tracker.stop()
+        print(f"  ECHEC pendant mesure: {e} -> skip", file=sys.stderr)
+        return
 
-    emissions = tracker.stop()  # kg CO2-eq
+    emissions = tracker.stop()
 
-    # Retrieve detailed energy data
-    last = tracker.final_emissions_data
-    energy_kwh = last.energy_consumed    # kWh
-    cpu_energy = last.cpu_energy         # kWh
-    gpu_energy = last.gpu_energy         # kWh
-    ram_energy = last.ram_energy         # kWh
-    duration_s = last.duration           # seconds
+    last       = tracker.final_emissions_data
+    energy_kwh = last.energy_consumed
+    cpu_energy = last.cpu_energy
+    gpu_energy = last.gpu_energy
+    ram_energy = last.ram_energy
+    duration_s = last.duration
 
-    total_time_ms = sum(float(r.split(",")[3]) for r in timing_rows)
-    avg_time_ms   = total_time_ms / args.runs
+    avg_time_ms = sum(float(r.split(",")[3]) for r in timing_rows) / runs
 
-    print("\n--- CodeCarbon Results ---", file=sys.stderr)
-    print(f"  Duration          : {duration_s:.2f} s", file=sys.stderr)
-    print(f"  Total energy      : {energy_kwh*1e6:.3f} mWh  ({energy_kwh:.6f} kWh)", file=sys.stderr)
-    print(f"    CPU energy      : {cpu_energy*1e6:.3f} mWh", file=sys.stderr)
-    print(f"    GPU energy      : {gpu_energy*1e6:.3f} mWh", file=sys.stderr)
-    print(f"    RAM energy      : {ram_energy*1e6:.3f} mWh", file=sys.stderr)
-    print(f"  CO2 emissions     : {emissions*1e6:.4f} mg CO2-eq", file=sys.stderr)
-    print(f"  Avg matmul time   : {avg_time_ms:.3f} ms", file=sys.stderr)
-    print(f"  Energy per run    : {energy_kwh/args.runs*1e6:.3f} mWh", file=sys.stderr)
+    print(f"  Duree         : {duration_s:.1f} s", file=sys.stderr)
+    print(f"  Energie totale: {energy_kwh*1e6:.3f} mWh", file=sys.stderr)
+    print(f"    CPU         : {cpu_energy*1e6:.3f} mWh", file=sys.stderr)
+    print(f"    GPU         : {gpu_energy*1e6:.3f} mWh", file=sys.stderr)
+    print(f"    RAM         : {ram_energy*1e6:.3f} mWh", file=sys.stderr)
+    print(f"  CO2           : {emissions*1e6:.4f} mg CO2-eq", file=sys.stderr)
+    print(f"  Temps moyen   : {avg_time_ms:.3f} ms", file=sys.stderr)
 
-    # Write summary CSV
-    write_header = not os.path.exists(args.output)
-    with open(args.output, "a", newline="") as f:
+    write_header = not os.path.exists(output)
+    with open(output, "a", newline="") as f:
         writer = csv.writer(f)
         if write_header:
             writer.writerow([
@@ -99,12 +93,45 @@ def main():
                 "energy_per_run_kwh", "co2_kg"
             ])
         writer.writerow([
-            args.M, args.N, args.R, args.runs,
+            m, n, r, runs,
             f"{avg_time_ms:.3f}", f"{duration_s:.3f}",
             f"{energy_kwh:.8f}", f"{cpu_energy:.8f}", f"{gpu_energy:.8f}", f"{ram_energy:.8f}",
-            f"{energy_kwh/args.runs:.8f}", f"{emissions:.8f}"
+            f"{energy_kwh/runs:.8f}", f"{emissions:.8f}"
         ])
-    print(f"\nResults appended to {args.output}", file=sys.stderr)
+    print(f"  -> sauvegarde dans {output}", file=sys.stderr)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("M", type=int, nargs="?")
+    parser.add_argument("N", type=int, nargs="?")
+    parser.add_argument("R", type=int, nargs="?")
+    parser.add_argument("--sweep", action="store_true",
+                        help="Mesure toutes les tailles par defaut")
+    parser.add_argument("--sizes", type=int, nargs="+",
+                        help="Tailles personnalisees pour --sweep (ex: --sizes 128 256 512)")
+    parser.add_argument("--runs", type=int, default=3)
+    parser.add_argument("--output", default="csv/energy_results.csv")
+    args = parser.parse_args()
+
+    if not os.path.exists(BINARY):
+        print(f"Binaire introuvable: {BINARY}. Lance: make test_time_opencl_perso", file=sys.stderr)
+        sys.exit(1)
+
+    os.makedirs("csv", exist_ok=True)
+
+    if args.sweep:
+        sizes = args.sizes if args.sizes else DEFAULT_SIZES
+        print(f"Sweep sur tailles: {sizes}", file=sys.stderr)
+        for sz in sizes:
+            measure_size(sz, sz, sz, args.runs, args.output)
+    elif args.M and args.N and args.R:
+        measure_size(args.M, args.N, args.R, args.runs, args.output)
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+    print(f"\nTermine. Resultats dans {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":
