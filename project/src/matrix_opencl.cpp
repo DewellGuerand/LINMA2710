@@ -344,7 +344,7 @@ MatrixCL MatrixCL::operator*(const MatrixCL& other) const
     queue_.enqueueNDRangeKernel(kernels_->kernel_matrix_mul, cl::NullRange,
     cl::NDRange(rows_, cols_),cl::NullRange);
     queue_.finish();
-    // TODO
+    // TODO2
 
     return result;
 }

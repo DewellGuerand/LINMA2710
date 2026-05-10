@@ -43,10 +43,10 @@ for op in operations:
     ax.set_xticklabels(pivot.columns)
     ax.set_yticks(range(len(pivot.index)))
     ax.set_yticklabels(pivot.index)
-    ax.set_xlabel("Taille de matrice")
-    ax.set_ylabel("Nombre de threads")
-    ax.set_title(f"Heatmap temps d'exécution — {op}", fontsize=13)
-    plt.colorbar(im, ax=ax, label="Temps moyen (s)")
+    ax.set_xlabel("Matrix size")
+    ax.set_ylabel("Number of threads")
+    ax.set_title(f"Execution time heatmap — {op}", fontsize=13)
+    plt.colorbar(im, ax=ax, label="Mean time (s)")
     for r, t in enumerate(pivot.index):
         for c, s in enumerate(pivot.columns):
             val = pivot.loc[t, s]
@@ -55,9 +55,9 @@ for op in operations:
     fig.tight_layout()
     out = os.path.join(OUT_DIR, f"{csv_stem}_heatmap_{op}.svg")
     fig.savefig(out)
-    print(f"Sauvegardé : {out}")
+    print(f"Saved: {out}")
 
-    # Graphique 2 — Speedup : temps(1 thread) / temps(N threads)
+    # Graph 2 — Speedup: time(1 thread) / time(N threads)
     base = subset[subset["threads"] == 1].groupby("size")["mean_time"].mean()
 
     fig, ax = plt.subplots(figsize=(9, 5))
@@ -71,15 +71,15 @@ for op in operations:
         ax.plot(grp["threads"].values, speedup,
                 marker="o", label=f"size={sz}", color=colors[i % len(colors)])
 
-    ax.plot(threads, threads, linestyle="--", color="black", label="Idéal")
-    ax.set_title(f"Speedup — opération : {op}", fontsize=13)
-    ax.set_xlabel("Nombre de threads")
+    ax.plot(threads, threads, linestyle="--", color="black", label="Ideal")
+    ax.set_title(f"Speedup — operation: {op}", fontsize=13)
+    ax.set_xlabel("Number of threads")
     ax.set_ylabel("Speedup (t1 / tN)")
-    ax.legend(title="Taille")
+    ax.legend(title="Size")
     ax.grid(linestyle="--", alpha=0.5)
     fig.tight_layout()
     out = os.path.join(OUT_DIR, f"{csv_stem}_speedup_{op}.svg")
     fig.savefig(out)
-    print(f"Sauvegardé : {out}")
+    print(f"Saved: {out}")
 
 plt.show()

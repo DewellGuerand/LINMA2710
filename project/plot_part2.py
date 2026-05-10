@@ -41,15 +41,15 @@ for op in operations:
         ax.plot(grp["threads"], grp["mean_time"],
                 marker="o", label=f"size={sz}", color=colors[i % len(colors)])
 
-    ax.set_title(f"Temps d'exécution — opération : {op}", fontsize=13)
-    ax.set_xlabel("Nombre de threads")
-    ax.set_ylabel("Temps moyen (s)")
-    ax.legend(title="Taille")
+    ax.set_title(f"Execution time — operation: {op}", fontsize=13)
+    ax.set_xlabel("Number of threads")
+    ax.set_ylabel("Mean time (s)")
+    ax.legend(title="Size")
     ax.grid(linestyle="--", alpha=0.5)
     fig.tight_layout()
 
     out = os.path.join(os.path.dirname(__file__), "report", "pics", f"{csv_stem}_threads_{op}.svg")
     fig.savefig(out)
-    print(f"Sauvegardé : {out}")
+    print(f"Saved: {out}")
 
 plt.show()

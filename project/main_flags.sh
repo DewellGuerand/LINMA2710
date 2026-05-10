@@ -24,7 +24,7 @@ OPERATIONS=(1 2 3 4 5 6)
 OP_NAMES=('add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul') # 'add' 'sub' 'matmul' 'scalar' 'transpose' 'sub_mul'
 SIZES=('100' '500' '1000' '2000' '4000')
 DIREC=csv
-FILES=mesures_perso_test_null.csv
+FILES=mesures_perso_my_pc_previous.csv
 
 echo "Config, run1, run2, run3, run4, run5, M, N, R, operation" > csv/${FILES}
 

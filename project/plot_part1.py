@@ -45,9 +45,9 @@ for op in operations:
         offset  = (i - n_flags / 2 + 0.5) * width
         ax.bar(x + offset, heights, width=width, label=flag, color=colors[i % len(colors)])
 
-    ax.set_title(f"Meilleur temps — opération : {op}", fontsize=13)
-    ax.set_xlabel("Taille de matrice (M = N = R)")
-    ax.set_ylabel("Temps (s)")
+    ax.set_title(f"Best time — operation: {op}", fontsize=13)
+    ax.set_xlabel("Matrix size (M = N = R)")
+    ax.set_ylabel("Time (s)")
     ax.set_xticks(x)
     ax.set_xticklabels(sizes)
     ax.legend(title="Flag")
@@ -56,6 +56,6 @@ for op in operations:
 
     out = os.path.join(os.path.dirname(__file__), "report", "pics", f"{csv_stem}_{op}.svg")
     fig.savefig(out)
-    print(f"Sauvegardé : {out}")
+    print(f"Saved: {out}")
 
 plt.show()
