@@ -88,6 +88,6 @@ run_time_opencl_perso: test_opencl_perso
 all: test_matrix test_distributed test_opencl
 
 clean:
-	rm -f test_matrix test_distributed test_opencl test_matrix_perso_O1 test_matrix_perso_O2 test_matrix_perso_O3 test_matrix_perso_fastmath test_matrix_perso_native test_matrix_perso_fO3 test_matrix_perso_fO3native test_distributed_perso test_questions nn_data_parallel
+	rm -f test_matrix test_distributed test_opencl test_matrix_perso_O1 test_matrix_perso_O2 test_matrix_perso_O3 test_matrix_perso_fastmath test_matrix_perso_native test_matrix_perso_fO3 test_matrix_perso_fO3native test_distributed_perso test_questions nn_data_parallel test_opencl_perso 
 
 .PHONY: all clean run_matrix run_distributed run_opencl

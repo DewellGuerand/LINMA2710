@@ -82,69 +82,69 @@ const std::string kernel_source_transpose = R"(
     }
 )";
 
-// const std::string kernel_source_matrix_mul = R"(
-//     __kernel void matrix_mul(__global const float* A,
-//                              __global const float* B,
-//                              __global float* C,
-//                              int A_rows, int A_cols, int B_cols) {
-//         int i = get_global_id(0);  // ligne de C
-//         int j = get_global_id(1);  // colonne de C
-//         if (i < A_rows && j < B_cols) {
-//             float sum = 0.0f;
-//             for (int k = 0; k < A_cols; k++) {
-//                 sum += A[i * A_cols + k] * B[k * B_cols + j];
-//             }
-//             C[i * B_cols + j] = sum;
-//         }
-//         TODO
-//     }
-// )"; 
-
- const std::string kernel_source_matrix_mul = R"(
-__kernel void matrix_mul(__global const float* A,
-                         __global const float* B,
-                         __global float* C,        // pas const !
-                         int A_rows, int A_cols, int B_cols) {
-    
-    #define TILE 16
-    __local float tileA[TILE][TILE];   // taille fixe connue à la compilation
-    __local float tileB[TILE][TILE];
-
-    int ii = get_local_id(0);
-    int jj = get_local_id(1);
-    int i = get_group_id(0) * TILE + ii;
-    int j = get_group_id(1) * TILE + jj;
-
-    float sum = 0.0f;
-
-    for (int h = 0; h < A_cols; h += TILE) {
-
-        // Charger tileA
-        if (i < A_rows && h + jj < A_cols)
-            tileA[ii][jj] = A[i * A_cols + h + jj];
-        else
-            tileA[ii][jj] = 0.0f;
-
-        // Charger tileB
-        if (h + ii < A_cols && j < B_cols)
-            tileB[ii][jj] = B[(h + ii) * B_cols + j];
-        else
-            tileB[ii][jj] = 0.0f;
-
-        // Attendre que tous les threads aient fini de charger
-        barrier(CLK_LOCAL_MEM_FENCE);
-
-        // Accumuler depuis la mémoire locale (rapide)
-        for (int k = 0; k < TILE; k++)
-            sum += tileA[ii][k] * tileB[k][jj];
-
-        // Attendre avant d'écraser les tiles au prochain tour
-        barrier(CLK_LOCAL_MEM_FENCE);
+const std::string kernel_source_matrix_mul = R"(
+    __kernel void matrix_mul(__global const float* A,
+                             __global const float* B,
+                             __global float* C,
+                             int A_rows, int A_cols, int B_cols) {
+        int i = get_global_id(0);  // ligne de C
+        int j = get_global_id(1);  // colonne de C
+        if (i < A_rows && j < B_cols) {
+            float sum = 0.0f;
+            for (int k = 0; k < A_cols; k++) {
+                sum += A[i * A_cols + k] * B[k * B_cols + j];
+            }
+            C[i * B_cols + j] = sum;
+        }
+        
     }
+)"; 
 
-    if (i < A_rows && j < B_cols)
-        C[i * B_cols + j] = sum;
-})";
+//  const std::string kernel_source_matrix_mul = R"(
+// __kernel void matrix_mul(__global const float* A,
+//                          __global const float* B,
+//                          __global float* C,        // pas const !
+//                          int A_rows, int A_cols, int B_cols) {
+    
+//     #define TILE 16
+//     __local float tileA[TILE][TILE];   // taille fixe connue à la compilation
+//     __local float tileB[TILE][TILE];
+
+//     int ii = get_local_id(0);
+//     int jj = get_local_id(1);
+//     int i = get_group_id(0) * TILE + ii;
+//     int j = get_group_id(1) * TILE + jj;
+
+//     float sum = 0.0f;
+
+//     for (int h = 0; h < A_cols; h += TILE) {
+
+//         // Charger tileA
+//         if (i < A_rows && h + jj < A_cols)
+//             tileA[ii][jj] = A[i * A_cols + h + jj];
+//         else
+//             tileA[ii][jj] = 0.0f;
+
+//         // Charger tileB
+//         if (h + ii < A_cols && j < B_cols)
+//             tileB[ii][jj] = B[(h + ii) * B_cols + j];
+//         else
+//             tileB[ii][jj] = 0.0f;
+
+//         // Attendre que tous les threads aient fini de charger
+//         barrier(CLK_LOCAL_MEM_FENCE);
+
+//         // Accumuler depuis la mémoire locale (rapide)
+//         for (int k = 0; k < TILE; k++)
+//             sum += tileA[ii][k] * tileB[k][jj];
+
+//         // Attendre avant d'écraser les tiles au prochain tour
+//         barrier(CLK_LOCAL_MEM_FENCE);
+//     }
+
+//     if (i < A_rows && j < B_cols)
+//         C[i * B_cols + j] = sum;
+// })";
 
 
 // --- KernelCache ---
@@ -337,10 +337,12 @@ MatrixCL MatrixCL::operator*(const MatrixCL& other) const
     kernels_->kernel_matrix_mul.setArg(3, rows_);
     kernels_->kernel_matrix_mul.setArg(4, cols_);
     kernels_->kernel_matrix_mul.setArg(5, other.cols_);
-    int global_rows = ((rows_ + 15) / 16) * 16;
-    int global_cols = ((other.cols_ + 15) / 16) * 16;
+    // int global_rows = ((rows_ + 15) / 16) * 16;
+    // int global_cols = ((other.cols_ + 15) / 16) * 16;
+    // queue_.enqueueNDRangeKernel(kernels_->kernel_matrix_mul, cl::NullRange,
+    //                             cl::NDRange(global_rows, global_cols),cl::NDRange(16, 16));
     queue_.enqueueNDRangeKernel(kernels_->kernel_matrix_mul, cl::NullRange,
-                                cl::NDRange(global_rows, global_cols),cl::NDRange(16, 16));
+    cl::NDRange(rows_, cols_),cl::NullRange);
     queue_.finish();
     // TODO
 
