@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -c \"\\\\\\\\\\\\\\\\r\")",
+      "Bash(sed -i 's/\\\\r//' 2_shared.jl)",
+      "Bash(sed -i 's/\\\\r//' 3_mpi.jl)",
+      "Bash(mv 2_shared_fixed.jl 2_shared.jl)",
+      "Bash(mv 3_mpi_fixed.jl 3_mpi.jl)",
+      "Bash(xxd 2_shared.jl)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

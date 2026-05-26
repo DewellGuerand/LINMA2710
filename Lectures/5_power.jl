@@ -1,11 +1,20 @@
 ### A Pluto.jl notebook ###
-# v0.20.23
+# v0.20.28
 
 using Markdown
 using InteractiveUtils
 
 # ╔═╡ 4d557e55-abaa-4526-9a80-1d32fd656633
 using PlutoUI, PlutoUI.ExperimentalLayout, HypertextLiteral,Luxor, BenchmarkTools, PlutoTeachingTools, DataFrames, CSV, Downloads, Unitful
+
+# ╔═╡ e5f6a7b8-c9d0-1234-ef01-234567890123
+@htl("""
+<script>
+const openAll = () => document.querySelectorAll('details').forEach(d => { d.open = true; });
+openAll();
+new MutationObserver(openAll).observe(document.body, {childList: true, subtree: true});
+</script>
+""")
 
 # ╔═╡ 3136760a-2be1-11f0-082c-73210e038b56
 @htl("""
@@ -1376,6 +1385,7 @@ version = "4.1.0+0"
 """
 
 # ╔═╡ Cell order:
+# ╟─e5f6a7b8-c9d0-1234-ef01-234567890123
 # ╟─3136760a-2be1-11f0-082c-73210e038b56
 # ╟─f1482d26-4aaf-44a9-b2cc-c672581bea36
 # ╟─9ee51ff3-73c7-45eb-a4f2-29b191abbf3a
